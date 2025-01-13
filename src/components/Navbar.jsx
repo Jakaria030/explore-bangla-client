@@ -5,12 +5,13 @@ import { useState } from "react";
 
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
     const links = <>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/community">Community</NavLink>
-        <NavLink to="/trips">Trips</NavLink>
-        <NavLink to="/about">About Us</NavLink>
+        <NavLink to="/" className="border-b-2 border-base-300 md:border-teal">Home</NavLink>
+        <NavLink to="/community" className="border-b-2 border-base-300 md:border-teal">Community</NavLink>
+        <NavLink to="/trips" className="border-b-2 border-base-300 md:border-teal">Trips</NavLink>
+        <NavLink to="/about" className="border-b-2 border-base-300 md:border-teal">About Us</NavLink>
     </>;
 
     return (
@@ -19,16 +20,11 @@ const Navbar = () => {
                 <div className="flex items-center justify-between">
                     {/* left side content */}
                     <div className="flex items-center gap-2">
-                        <div className="dropdown">
-                            <div tabIndex={0} role="button" className="md:hidden">
-                                <MdMenu className="text-3xl text-white "></MdMenu>
-                            </div>
-                            <ul
-                                tabIndex={0}
-                                className="menu menu-md dropdown-content bg-gray rounded-sm z-[1] border-t-4 border-orange mt-5 w-52 p-2 shadow">
-                                {links}
-                            </ul>
-                        </div>
+                        <button onClick={() => setIsOpen(true)} className="md:hidden">
+                            <MdMenu className="text-3xl text-white "></MdMenu>
+                        </button>
+
+
                         <Link to="/" className="flex items-center gap-2">
                             <figure className="size-12 bg-white rounded-full hidden sm:flex items-center justify-center">
                                 <img className="size-8 mx-auto" src={logo} alt="Logo" />
@@ -48,6 +44,19 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+
+            {
+                isOpen && <div className=" absolute min-h-screen top-0 w-[320px] bg-base-300 md:hidden p-5">
+                    <div>
+                        <button onClick={() => setIsOpen(false)} className="md:hidden">
+                            <MdClose className="text-3xl text-charcoal" />
+                        </button>
+                        <ul className="flex flex-col gap-1 ">
+                            {links}
+                        </ul>
+                    </div>
+                </div>
+            }
         </section>
     );
 };

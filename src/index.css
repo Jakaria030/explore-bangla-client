@@ -2,3 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+a.active{
+    border-bottom-color: #FF8C42;
+}
