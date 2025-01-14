@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { MdManageAccounts, MdMenu, MdNoteAdd, MdPersonAddAlt1 } from "react-icons/md";
-import { GrUnorderedList } from "react-icons/gr";
-import { SiStorybook } from "react-icons/si";
+import { MdMenu } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
+import TouristSidebar from "../dashboard/TouristPage/SidebarRoutes/TouristSidebar";
+import TourGuideSidebar from "../dashboard/TourGuidPage/SidebarRoutes/TourGuideSidebar";
+import AdminSidebar from "../dashboard/AdminPage/SidebarRoutes/AdminSidebar";
 
 const BackLayoute = () => {
     return (
@@ -14,10 +15,13 @@ const BackLayoute = () => {
                 <label htmlFor="my-drawer-2" className="drawer-button lg:hidden">
                     <MdMenu className="text-3xl"></MdMenu>
                 </label>
+
+                {/* dynamic content here */}
+                <Outlet></Outlet>
             </div>
+
             <div className="drawer-side ">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-
                 <div className="menu text-charcoal min-h-full w-80 bg-orange/90">
                     {/* logo */}
                     <nav className="border-b-2 border-white">
@@ -31,13 +35,14 @@ const BackLayoute = () => {
                     {/* routes */}
                     <main className="flex-grow">
                         {/* Sidebar content here */}
-                        <ul>
-                            <li><Link to="/dashboard/"><MdManageAccounts className="text-2xl" />Manage Profile</Link></li>
-                            <li><Link to="/dashboard/"><GrUnorderedList className="text-2xl" />My Bookings</Link></li>
-                            <li><Link to="/dashboard/"><SiStorybook className="text-2xl" />Manage Stories</Link></li>
-                            <li><Link to="/dashboard/"><MdNoteAdd className="text-2xl" />Add Stories</Link></li>
-                            <li><Link to="/dashboard/"><MdPersonAddAlt1 className="text-2xl" />Join As Tour Guid</Link></li>
-                        </ul>
+
+                        {/* TODO: conditionaly render here */}
+                        {/* <TouristSidebar></TouristSidebar> */}
+                        {/* <TourGuideSidebar></TourGuideSidebar> */}
+                        <AdminSidebar></AdminSidebar>
+
+
+
                         <ul className="border-t-2 border-white">
                             <li><Link to="/"><FaHome className="text-2xl" />Home</Link></li>
                         </ul>
