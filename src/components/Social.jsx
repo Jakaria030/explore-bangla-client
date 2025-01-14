@@ -2,13 +2,15 @@ import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import { errorAlert, successAlert } from "../toastify/toastify";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Social = () => {
     const {signInWithGoogle, setUser} = useAuth();
     const axiosPublic = useAxiosPublic();
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    
     const handleGoogleSignIn = async () => {
         try {
             const fbRes = await signInWithGoogle();
@@ -29,7 +31,7 @@ const Social = () => {
                 }
             }
             successAlert("Continue with google success.");
-            navigate(`/`);
+            navigate(`${location.state ? location.state : '/'}`);
         } catch (error) {
             errorAlert("Can't sign in. Please try again.");
             console.log(error);

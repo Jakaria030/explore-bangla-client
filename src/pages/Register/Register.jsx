@@ -2,7 +2,7 @@ import { FaEye, FaEyeSlash, FaImage, FaKey, FaUser } from "react-icons/fa";
 import regisertImage from "../../assets/login-register.jpg";
 import { MdEmail } from "react-icons/md";
 import Social from "../../components/Social";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "axios";
@@ -23,7 +23,8 @@ const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const navigate = useNavigate();
-
+    const location = useLocation();
+    
     const handleRegister = async (data) => {
         // console.log(data.image[0]);
 
@@ -57,7 +58,7 @@ const Register = () => {
                 await axiosPublic.post("/users", newUser);
                 
                 reset();
-                navigate("/");
+                navigate(`${location.state ? location.state : '/'}`);
                 // TODO toast alert set here
                 successAlert("Successfully created account.");
             }else{

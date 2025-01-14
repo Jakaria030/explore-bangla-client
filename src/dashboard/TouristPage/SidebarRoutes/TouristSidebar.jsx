@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 const TouristSidebar = () => {
     return (
         <ul>
-            <li><Link to="/dashboard/tourist-profile"><MdManageAccounts className="text-2xl" />Manage Profile</Link></li>
-            <li><Link to="/"><GrUnorderedList className="text-2xl" />My Bookings</Link></li>
-            <li><Link to="/"><SiStorybook className="text-2xl" />Manage Stories</Link></li>
-            <li><Link to="/"><MdNoteAdd className="text-2xl" />Add Stories</Link></li>
-            <li><Link to="/"><MdPersonAddAlt1 className="text-2xl" />Join As Tour Guid</Link></li>
+            <li><Link to="/dashboard/tourist-manage-profile"><MdManageAccounts className="text-2xl" />Manage Profile</Link></li>
+            <li><Link to="/dashboard/tourist-my-bookings"><GrUnorderedList className="text-2xl" />My Bookings</Link></li>
+            <li><Link to="/dashboard/tourist-manage-stories"><SiStorybook className="text-2xl" />Manage Stories</Link></li>
+            <li><Link to="/dashboard/tourist-add-stories"><MdNoteAdd className="text-2xl" />Add Stories</Link></li>
+            <li><Link to="/dashboard/tourist-join-as-tour-guid"><MdPersonAddAlt1 className="text-2xl" />Join As Tour Guid</Link></li>
         </ul>
     );
 };

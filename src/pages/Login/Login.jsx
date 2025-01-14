@@ -2,7 +2,7 @@ import { FaEye, FaEyeSlash, FaKey } from "react-icons/fa";
 import loginImage from "../../assets/login-register.jpg";
 import { MdEmail } from "react-icons/md";
 import Social from "../../components/Social";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -14,8 +14,9 @@ const Login = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    
     const navigate = useNavigate();
-
+    const location = useLocation();
 
     const handleLogin = async (data) => {
         try{
@@ -25,7 +26,7 @@ const Login = () => {
 
             reset();
             successAlert("Login successful.");
-            navigate("/")
+            navigate(`${location.state ? location.state : '/'}`);
         } catch(error){
             errorAlert("Email or password invalid!");
         }finally{
