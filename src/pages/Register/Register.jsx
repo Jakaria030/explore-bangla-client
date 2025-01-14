@@ -9,6 +9,7 @@ import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../../components/Spinner";
+import { errorAlert, successAlert } from "../../toastify/toastify";
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -53,12 +54,14 @@ const Register = () => {
                 }
 
                 // user informations upload in database
-                const dbRes = await axiosPublic.post("/users", newUser);
+                await axiosPublic.post("/users", newUser);
                 
                 reset();
                 navigate("/");
                 // TODO toast alert set here
-                alert('Success')
+                successAlert("Successfully created account.");
+            }else{
+                errorAlert("Sory, Account is not created.");
             }
         } finally {
             setIsLoading(false);
@@ -102,7 +105,7 @@ const Register = () => {
 
                             <label className="input input-bordered flex items-center gap-2">
                                 <FaKey className="text-xl opacity-70" />
-                                <input type={`${isEyeOpen ? 'password' : 'text'}`} {...register("password", { required: "Password is required.", pattern: { value: passwordRegex, message: "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character." } })} className="grow" placeholder="Password" />
+                                <input type={`${isEyeOpen ? "password" : "text"}`} {...register("password", { required: "Password is required.", pattern: { value: passwordRegex, message: "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character." } })} className="grow" placeholder="Password" />
                                 {
                                     isEyeOpen ? <FaEye className="opacity-70 cursor-pointer" onClick={() => setIsEyeOpen(false)}></FaEye> : <FaEyeSlash className="opacity-70 cursor-pointer" onClick={() => setIsEyeOpen(true)}></FaEyeSlash>
                                 }

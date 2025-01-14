@@ -2,10 +2,14 @@ import { MdClose, MdMenu } from "react-icons/md";
 import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
+import Spinner from "./Spinner";
+import { successAlert } from "../toastify/toastify";
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { user, signOutUser, loading } = useAuth();
 
     const links = <>
         <NavLink to="/" className="border-b-2 border-base-300 md:border-teal">Home</NavLink>
@@ -13,6 +17,11 @@ const Navbar = () => {
         <NavLink to="/trips" className="border-b-2 border-base-300 md:border-teal">Trips</NavLink>
         <NavLink to="/about" className="border-b-2 border-base-300 md:border-teal">About Us</NavLink>
     </>;
+
+    const handleLogout = async () => {
+        await signOutUser();
+        successAlert("Logout successful.");
+    };
 
     return (
         <section className="bg-teal py-5">
@@ -33,14 +42,33 @@ const Navbar = () => {
                         </Link>
                     </div>
 
+                    {/* center content */}
+                    <div className=" hidden md:flex">
+                        <ul className="flex items-center gap-3 text-white text-lg">
+                            {links}
+                        </ul>
+                    </div>
+
                     {/* right side content */}
-                    <div className="flex items-center gap-5">
-                        <div className=" hidden md:flex">
-                            <ul className="flex items-center gap-3 text-white text-lg">
-                                {links}
-                            </ul>
-                        </div>
-                        <button className="px-4 py-1 sm:py-2 bg-orange rounded-sm font-semibold text-white">Login</button>
+                    <div>
+                        {
+                            (!loading && user) ? <div className="size-12 flex items-center justify-center">
+                                <div className="dropdown dropdown-end">
+                                    <button tabIndex={0} role="button" className="size-12 rounded-full ring-2 ring-orange">
+                                        <img className="rounded-full" src={user.photoURL} />
+                                    </button>
+
+                                    <ul tabIndex={0} className="dropdown-content menu bg-teal/80 rounded-b-md z-[1] mt-4 w-60 p-2 text-white shadow">
+                                        <li className="text-center">{user.displayName}</li>
+                                        <li className="text-center">{user.email}</li>
+                                        <hr className="my-1"/>
+                                        <li><Link to="/dashboard">Dashboard</Link></li>
+                                        <li><Link>Offer</Link></li>
+                                        <li><button onClick={handleLogout}>Logout</button></li>
+                                    </ul>
+                                </div>
+                            </div> : <Link to="/login"><button className="px-4 py-1 sm:py-2 bg-orange rounded-sm font-semibold text-white">Login</button></Link>
+                        }
                     </div>
                 </div>
             </div>
