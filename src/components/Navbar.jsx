@@ -3,7 +3,6 @@ import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
-import Spinner from "./Spinner";
 import { successAlert } from "../toastify/toastify";
 
 
@@ -63,7 +62,6 @@ const Navbar = () => {
                                         <li className="text-center">{user.email}</li>
                                         <hr className="my-1"/>
                                         <li><Link to="/dashboard">Dashboard</Link></li>
-                                        <li><Link>Offer</Link></li>
                                         <li><button onClick={handleLogout}>Logout</button></li>
                                     </ul>
                                 </div>

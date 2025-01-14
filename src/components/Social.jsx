@@ -2,11 +2,12 @@ import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import { errorAlert, successAlert } from "../toastify/toastify";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const Social = () => {
     const {signInWithGoogle, setUser} = useAuth();
     const axiosPublic = useAxiosPublic();
-
+    const navigate = useNavigate();
 
     const handleGoogleSignIn = async () => {
         try {
@@ -28,6 +29,7 @@ const Social = () => {
                 }
             }
             successAlert("Continue with google success.");
+            navigate(`/`);
         } catch (error) {
             errorAlert("Can't sign in. Please try again.");
             console.log(error);
