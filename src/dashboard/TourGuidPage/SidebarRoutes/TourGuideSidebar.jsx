@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const TourGuideSidebar = () => {
     return (
-        <ul>
+        <ul className="text-white">
             <li><Link to="/dashboard/tour-guide-manage-profile"><MdManageAccounts className="text-2xl" />Manage Profile</Link></li>
             <li><Link to="/dashboard/tour-guide-my-assigned-tours"><GrUnorderedList className="text-2xl" />My Assigned Tours</Link></li>
             <li><Link to="/dashboard/tour-guide-add-stories"><MdNoteAdd className="text-2xl" />Add Stories</Link></li>

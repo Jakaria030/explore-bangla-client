@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
     return (
-        <ul>
+        <ul className="text-white">
             <li><Link to="/dashboard/admin-manage-profile"><MdManageAccounts className="text-2xl" />Manage Profile</Link></li>
             <li><Link to="/dashboard/admin-add-package"><RiFunctionAddLine className="text-2xl" />Add Package</Link></li>
             <li><Link to="/dashboard/admin-manage-users"><FaUsersGear className="text-2xl" />Manage Users</Link></li>

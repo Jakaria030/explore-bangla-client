@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { successAlert } from "../toastify/toastify";
+import Spinner from "./Spinner";
 
 
 const Navbar = () => {

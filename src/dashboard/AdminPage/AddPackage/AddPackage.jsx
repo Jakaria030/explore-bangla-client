@@ -5,6 +5,7 @@ import { imageUpload } from "../../../utilities/imageUpload";
 import { useState } from "react";
 import { errorAlert, successAlert } from "../../../toastify/toastify";
 import Spinner from "../../../components/Spinner";
+import { MdMenu } from "react-icons/md";
 
 
 const AddPackage = () => {
@@ -54,13 +55,16 @@ const AddPackage = () => {
 
     return (
         <section>
-            <section className="bg-orange/90 py-5">
-                <h2 className="text-2xl text-center text-teal uppercase font-bold">Add Package Form</h2>
+            <section className="flex items-center px-5 bg-teal/80 py-5 sticky top-0 backdrop-blur-lg">
+                <label htmlFor="my-drawer-2" className="drawer-button lg:hidden text-left">
+                    <MdMenu className="text-3xl text-black "></MdMenu>
+                </label>
+                <h2 className="text-2xl mx-auto text-center text-white uppercase font-bold">Add Package Form</h2>
             </section>
 
             {/* form */}
-            <div className="max-w-5xl mx-auto py-10">
-                <form onSubmit={handleSubmit(handlePackage)} className="border border-orange space-y-2 p-5">
+            <div className="max-w-5xl mx-auto px-5 py-10">
+                <form onSubmit={handleSubmit(handlePackage)} className="border border-slate-500 space-y-2 p-5">
                     <div className="flex flex-col md:flex-row md:gap-5">
                         <div className="w-full">
                             <label className="form-control w-full">
@@ -142,10 +146,10 @@ const AddPackage = () => {
                         ))}
                     </div>
                     <div className="">
-                        <button type="button" onClick={() => append("Write tour plan.")} className="px-4 py-2 rounded-md text-white bg-orange">Add Day</button>
+                        <button type="button" onClick={() => append("Write tour plan.")} className="px-4 py-2 rounded-md text-white bg-blue-500">Add Day</button>
                     </div>
                     <div className="flex flex-row pt-5">
-                        <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal w-full">{isLoading ? <Spinner></Spinner> : "Save Package"}</button>
+                        <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal/80 w-full">{isLoading ? <Spinner></Spinner> : "Save Package"}</button>
                     </div>
                 </form>
             </div>

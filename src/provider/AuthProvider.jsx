@@ -51,12 +51,20 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
 
             if(currentUser){
-                axiosPublic.post("/jwt", {email: currentUser.email})
-                .then(dbRes => {
+                // get user role
+                const user = {email: currentUser.email};
+
+                const createJWT = async () => {
+                    const dbGetRes = await axiosPublic.get(`/users/role?email=${currentUser.email}`)
+                    user.role = dbGetRes.data?.role;
+                    
+                    const dbRes = await axiosPublic.post("/jwt", user)
                     if(dbRes.data.token){
-                        localStorage.setItem('access-token', dbRes.data.token);
+                            localStorage.setItem('access-token', dbRes.data.token);
                     }
-                })
+                }
+
+                createJWT();
             }else{
                 localStorage.removeItem('access-token');
             }
@@ -68,7 +76,7 @@ const AuthProvider = ({ children }) => {
             unsubscribe();
         };
 
-    }, [user])
+    }, [user, setUser])
 
 
     // auth informations

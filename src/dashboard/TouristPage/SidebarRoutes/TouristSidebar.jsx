@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const TouristSidebar = () => {
     return (
-        <ul>
+        <ul className="text-white">
             <li><Link to="/dashboard/tourist-manage-profile"><MdManageAccounts className="text-2xl" />Manage Profile</Link></li>
             <li><Link to="/dashboard/tourist-my-bookings"><GrUnorderedList className="text-2xl" />My Bookings</Link></li>
             <li><Link to="/dashboard/tourist-manage-stories"><SiStorybook className="text-2xl" />Manage Stories</Link></li>

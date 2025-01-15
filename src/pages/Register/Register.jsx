@@ -5,7 +5,6 @@ import Social from "../../components/Social";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../../components/Spinner";
@@ -15,7 +14,7 @@ import { imageUpload } from "../../utilities/imageUpload";
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
 
 const Register = () => {
-    const { createUser, updateUserProfile } = useAuth();
+    const { createUser, updateUserProfile, setUser } = useAuth();
     const axiosPublic = useAxiosPublic();
     const [isEyeOpen, setIsEyeOpen] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +46,12 @@ const Register = () => {
                 if (createFbRes.user?.email) {
                     // user profile update in firebase
                     await updateUserProfile({ displayName: newUser.name, photoURL: newUser.image });
+                    const updatedUserProfile = {
+                        ...createFbRes.user,
+                        displayName: newUser.name,
+                        photoURL: newUser.image
+                    };
+                    setUser(updatedUserProfile);
                 }
 
                 // user informations upload in database
@@ -54,7 +59,6 @@ const Register = () => {
                 
                 reset();
                 navigate(`${location.state ? location.state : '/'}`);
-                // TODO toast alert set here
                 successAlert("Successfully created account.");
             }else{
                 errorAlert("Sory, Account is not created.");
