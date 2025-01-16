@@ -4,8 +4,13 @@ import { FaHome } from "react-icons/fa";
 import TouristSidebar from "../dashboard/TouristPage/SidebarRoutes/TouristSidebar";
 import TourGuideSidebar from "../dashboard/TourGuidPage/SidebarRoutes/TourGuideSidebar";
 import AdminSidebar from "../dashboard/AdminPage/SidebarRoutes/AdminSidebar";
+import useAdmin from "../hooks/useAdmin";
+import useTourGuide from "../hooks/useTourGuide";
 
 const BackLayoute = () => {
+    const {isAdmin, isAdminLoading} = useAdmin();
+    const {isTourGuide, isTourGuideLoading} = useTourGuide();
+
     return (
         <section className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -31,12 +36,10 @@ const BackLayoute = () => {
                     <main className="flex-grow">
                         {/* Sidebar content here */}
 
-                        {/* TODO: conditionaly render here */}
-                        {/* <TouristSidebar></TouristSidebar> */}
-                        {/* <TourGuideSidebar></TourGuideSidebar> */}
-                        <AdminSidebar></AdminSidebar>
-
-
+                        { !isAdminLoading && isAdmin && <AdminSidebar></AdminSidebar> }
+                        { !isTourGuideLoading && isTourGuide && <TouristSidebar></TouristSidebar> }
+                        <TourGuideSidebar></TourGuideSidebar>
+                        
 
                         <ul className="border-t-2 text-white border-white">
                             <li><Link to="/"><FaHome className="text-2xl" />Home</Link></li>
