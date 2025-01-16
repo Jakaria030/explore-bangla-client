@@ -4,14 +4,22 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { successAlert } from "../toastify/toastify";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, signOutUser, loading } = useAuth();
+    const [role, setRole] = useState("tourist");
 
     const navigate = useNavigate();
-    
+    const axiosSecure = useAxiosSecure();
+
+    if (!loading && user){
+        axiosSecure.get(`/users/role?email=${user?.email}`)
+        .then(res => setRole(res.data.role))
+    }
+
     const links = <>
         <NavLink to="/" className="border-b-2 border-base-300 md:border-teal">Home</NavLink>
         <NavLink to="/community" className="border-b-2 border-base-300 md:border-teal">Community</NavLink>
@@ -24,7 +32,7 @@ const Navbar = () => {
         successAlert("Logout successful.");
         navigate("/");
     };
-    
+
     return (
         <section className="bg-teal py-5">
             <div className="max-w-8xl mx-auto px-5">
@@ -63,8 +71,8 @@ const Navbar = () => {
                                     <ul tabIndex={0} className="dropdown-content menu bg-teal/80 rounded-b-md z-[1] mt-4 w-60 p-2 text-white shadow">
                                         <li className="text-center">{user.displayName}</li>
                                         <li className="text-center">{user.email}</li>
-                                        <hr className="my-1"/>
-                                        <li><Link to="/dashboard">Dashboard</Link></li>
+                                        <hr className="my-1" />
+                                        <li><Link to={`/dashboard/${(role === 'admin' && 'admin-manage-profile') || (role === 'tour-guide' && 'tour-guide-manage-profile') || (role === 'tourist' && 'tourist-manage-profile')}`}>Dashboard</Link></li>
                                         <li><button onClick={handleLogout}>Logout</button></li>
                                     </ul>
                                 </div>

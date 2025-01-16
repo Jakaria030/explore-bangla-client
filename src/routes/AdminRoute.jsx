@@ -1,23 +1,28 @@
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, } from 'react-router-dom';
 import useAdmin from '../hooks/useAdmin';
 import useAuth from '../hooks/useAuth';
 import Spinner from '../components/Spinner';
 
 const AdminRoute = ({ children }) => {
-    const {user, loading} = useAuth();
-    const {isAdmin, isAdminLoading} = useAdmin();
-    const location = useLocation();
+    const { user, loading, signOutUser } = useAuth();
+    const { isAdmin, isAdminLoading } = useAdmin();
 
-    if(loading || isAdminLoading){
+    if (loading || isAdminLoading) {
         return <Spinner></Spinner>;
     }
 
-    if(user && isAdmin){
+    if (user && isAdmin) {
         return children;
     }
 
-    return <Navigate to="/login" state={location.pathname}></Navigate>;
+    if (user) {
+        const handleLogout = async () => {
+            await signOutUser();
+        };
+        handleLogout();
+    }
+
+    return <Navigate to="/login"></Navigate>;
 };
 
 export default AdminRoute;

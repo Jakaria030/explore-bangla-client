@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const TouristSidebar = () => {
     return (
-        <ul className="text-white">
+        <ul className="text-white my-2">
             <li><NavLink to="/dashboard/tourist-manage-profile"><MdManageAccounts className="text-2xl" />Manage Profile</NavLink></li>
             <li><NavLink to="/dashboard/tourist-my-bookings"><GrUnorderedList className="text-2xl" />My Bookings</NavLink></li>
             <li><NavLink to="/dashboard/tourist-manage-stories"><SiStorybook className="text-2xl" />Manage Stories</NavLink></li>

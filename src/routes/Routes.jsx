@@ -9,6 +9,7 @@ import AddTourPackage from "../dashboard/AdminPage/AddPackage/AddPackage";
 import ManageUsers from "../dashboard/AdminPage/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import TourGuideRoute from "./TourGuideRoute";
+import TouristRoute from "./TouristRoute";
 
 export const router = createBrowserRouter([
     {
@@ -36,23 +37,23 @@ export const router = createBrowserRouter([
             // tourist routes
             {
                 path: "tourist-manage-profile",
-                element: <h1>tourist-manage-profile</h1>
+                element: <TouristRoute><h1>tourist-manage-profile</h1></TouristRoute>
             },
             {
                 path: "tourist-my-bookings",
-                element: <h1>tourist-my-bookings</h1>
+                element: <TouristRoute><h1>tourist-my-bookings</h1></TouristRoute>
             },
             {
                 path: "tourist-manage-stories",
-                element: <h1>tourist-manage-stories</h1>
+                element: <TouristRoute><h1>tourist-manage-stories</h1></TouristRoute>
             },
             {
                 path: "tourist-add-stories",
-                element: <h1>tourist-add-stories</h1>
+                element: <TouristRoute><h1>tourist-add-stories</h1></TouristRoute>
             },
             {
                 path: "tourist-join-as-tour-guid",
-                element: <h1>tourist-join-as-tour-guid</h1>
+                element: <TouristRoute><h1>tourist-join-as-tour-guid</h1></TouristRoute>
             },
 
             // tour guid routes

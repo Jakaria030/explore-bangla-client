@@ -6,10 +6,12 @@ import TourGuideSidebar from "../dashboard/TourGuidPage/SidebarRoutes/TourGuideS
 import AdminSidebar from "../dashboard/AdminPage/SidebarRoutes/AdminSidebar";
 import useAdmin from "../hooks/useAdmin";
 import useTourGuide from "../hooks/useTourGuide";
+import useTourist from "../hooks/useTourist";
 
 const BackLayoute = () => {
     const {isAdmin, isAdminLoading} = useAdmin();
     const {isTourGuide, isTourGuideLoading} = useTourGuide();
+    const {isTourist, isTouristLoading} = useTourist();
 
     return (
         <section className="drawer lg:drawer-open">
@@ -37,8 +39,8 @@ const BackLayoute = () => {
                         {/* Sidebar content here */}
 
                         { !isAdminLoading && isAdmin && <AdminSidebar></AdminSidebar> }
-                        { !isTourGuideLoading && isTourGuide && <TouristSidebar></TouristSidebar> }
-                        <TourGuideSidebar></TourGuideSidebar>
+                        { !isTourGuideLoading && isTourGuide && <TourGuideSidebar></TourGuideSidebar> }
+                        { !isTouristLoading && isTourist && <TouristSidebar></TouristSidebar>}
                         
 
                         <ul className="border-t-2 text-white border-white">

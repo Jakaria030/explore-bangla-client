@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const AdminSidebar = () => {
     return (
-        <ul className="text-white">
+        <ul className="text-white my-2">
             <li><NavLink to="/dashboard/admin-manage-profile"><MdManageAccounts className="text-2xl" />Manage Profile</NavLink></li>
             <li><NavLink to="/dashboard/admin-add-package"><RiFunctionAddLine className="text-2xl" />Add Package</NavLink></li>
             <li><NavLink to="/dashboard/admin-manage-users"><FaUsersGear className="text-2xl" />Manage Users</NavLink></li>

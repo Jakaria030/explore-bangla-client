@@ -9,8 +9,8 @@ const useTourGuide = () => {
     const {data: isTourGuide, isLoading: isTourGuideLoading} = useQuery({
         queryKey: ["tour-guide", user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/tour-guid/${user.email}`);
-            return res.data?.tourGuid;
+            const res = await axiosSecure.get(`/users/tour-guide/${user.email}`);
+            return res.data?.tourGuide;
         }
     });
 

@@ -15,7 +15,7 @@ const ManageUsers = () => {
 
     const options = [
         { value: "admin", label: "Admin" },
-        { value: "tour-guid", label: "Tour-guid" },
+        { value: "tour-guide", label: "Tour-guide" },
         { value: "tourist", label: "Tourist" }
     ];
 
