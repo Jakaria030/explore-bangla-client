@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import BackLayoute from "../layoutes/BackLayoute";
 import PrivateRoute from "./PrivateRoute";
 import AddTourPackage from "../dashboard/AdminPage/AddPackage/AddPackage";
+import ManageUsers from "../dashboard/AdminPage/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -81,7 +82,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "admin-manage-users",
-                element: <h1>admin-manage-users</h1>
+                element: <ManageUsers></ManageUsers>
             },
             {
                 path: "admin-manage-candidates",

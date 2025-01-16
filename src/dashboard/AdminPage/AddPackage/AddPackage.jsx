@@ -6,6 +6,7 @@ import { useState } from "react";
 import { errorAlert, successAlert } from "../../../toastify/toastify";
 import Spinner from "../../../components/Spinner";
 import { MdMenu } from "react-icons/md";
+import HeaderTitle from "../../components/HeaderTitle";
 
 
 const AddPackage = () => {
@@ -55,12 +56,8 @@ const AddPackage = () => {
 
     return (
         <section>
-            <section className="flex items-center px-5 bg-teal/80 py-5 sticky top-0 backdrop-blur-lg">
-                <label htmlFor="my-drawer-2" className="drawer-button lg:hidden text-left">
-                    <MdMenu className="text-3xl text-black "></MdMenu>
-                </label>
-                <h2 className="text-2xl mx-auto text-center text-white uppercase font-bold">Add Package Form</h2>
-            </section>
+            {/* Heading title */}
+            <HeaderTitle title={"Add package form"}></HeaderTitle>
 
             {/* form */}
             <div className="max-w-5xl mx-auto px-5 py-10">

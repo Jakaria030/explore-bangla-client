@@ -1,6 +1,6 @@
 import { MdClose, MdMenu } from "react-icons/md";
 import logo from "../assets/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { successAlert } from "../toastify/toastify";
@@ -11,6 +11,8 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, signOutUser, loading } = useAuth();
 
+    const navigate = useNavigate();
+    
     const links = <>
         <NavLink to="/" className="border-b-2 border-base-300 md:border-teal">Home</NavLink>
         <NavLink to="/community" className="border-b-2 border-base-300 md:border-teal">Community</NavLink>
@@ -21,6 +23,7 @@ const Navbar = () => {
     const handleLogout = async () => {
         await signOutUser();
         successAlert("Logout successful.");
+        navigate("/");
     };
 
     return (

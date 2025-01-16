@@ -24,7 +24,7 @@ const Social = () => {
                     role: "tourist"
                 }
 
-                const dbRes = await axiosPublic.get(`/users?email=${fbRes.user.email}`);
+                const dbRes = await axiosPublic.get(`/users/exist?email=${fbRes.user.email}`);
 
                 if(dbRes.data.count === 0){
                     await axiosPublic.post("/users", user);
