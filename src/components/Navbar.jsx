@@ -4,21 +4,13 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { successAlert } from "../toastify/toastify";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, signOutUser, loading } = useAuth();
-    const [role, setRole] = useState("tourist");
 
     const navigate = useNavigate();
-    const axiosSecure = useAxiosSecure();
-
-    if (!loading && user){
-        axiosSecure.get(`/users/role?email=${user?.email}`)
-        .then(res => setRole(res.data.role))
-    }
 
     const links = <>
         <NavLink to="/" className="border-b-2 border-base-300 md:border-teal">Home</NavLink>
@@ -72,7 +64,7 @@ const Navbar = () => {
                                         <li className="text-center">{user.displayName}</li>
                                         <li className="text-center">{user.email}</li>
                                         <hr className="my-1" />
-                                        <li><Link to={`/dashboard/${(role === 'admin' && 'admin-manage-profile') || (role === 'tour-guide' && 'tour-guide-manage-profile') || (role === 'tourist' && 'tourist-manage-profile')}`}>Dashboard</Link></li>
+                                        <li><Link to="/dashboard">Dashboard</Link></li>
                                         <li><button onClick={handleLogout}>Logout</button></li>
                                     </ul>
                                 </div>

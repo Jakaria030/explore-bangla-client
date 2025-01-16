@@ -10,6 +10,7 @@ import ManageUsers from "../dashboard/AdminPage/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import TourGuideRoute from "./TourGuideRoute";
 import TouristRoute from "./TouristRoute";
+import RoleBaseRedirect from "../dashboard/components/RoleBaseRedirect";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: <PrivateRoute><BackLayoute></BackLayoute></PrivateRoute>,
         children: [
+            {
+                index: true,
+                element: <RoleBaseRedirect></RoleBaseRedirect>
+            },
             // tourist routes
             {
                 path: "tourist-manage-profile",
