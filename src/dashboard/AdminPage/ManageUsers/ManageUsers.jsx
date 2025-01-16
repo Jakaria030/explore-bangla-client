@@ -29,8 +29,6 @@ const ManageUsers = () => {
         setPage(page + 1);
     }
 
-    console.log(page);
-
     return (
         <section>
             {/* heading title */}

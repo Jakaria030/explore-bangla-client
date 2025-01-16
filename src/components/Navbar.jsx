@@ -4,7 +4,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { successAlert } from "../toastify/toastify";
-import Spinner from "./Spinner";
 
 
 const Navbar = () => {
@@ -25,7 +24,7 @@ const Navbar = () => {
         successAlert("Logout successful.");
         navigate("/");
     };
-
+    
     return (
         <section className="bg-teal py-5">
             <div className="max-w-8xl mx-auto px-5">

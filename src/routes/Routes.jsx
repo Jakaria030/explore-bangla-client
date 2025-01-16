@@ -7,6 +7,7 @@ import BackLayoute from "../layoutes/BackLayoute";
 import PrivateRoute from "./PrivateRoute";
 import AddTourPackage from "../dashboard/AdminPage/AddPackage/AddPackage";
 import ManageUsers from "../dashboard/AdminPage/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -74,19 +75,19 @@ export const router = createBrowserRouter([
             // admin routes
             {
                 path: "admin-manage-profile",
-                element: <h1>admin-manage-profile</h1>
+                element: <AdminRoute><h1>admin-manage-profile</h1></AdminRoute>
             },
             {
                 path: "admin-add-package",
-                element: <AddTourPackage></AddTourPackage>
+                element: <AdminRoute><AddTourPackage></AddTourPackage></AdminRoute>
             },
             {
                 path: "admin-manage-users",
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: "admin-manage-candidates",
-                element: <h1>admin-manage-candidates</h1>
+                element: <AdminRoute><h1>admin-manage-candidates</h1></AdminRoute>
             },
         ],
     }
