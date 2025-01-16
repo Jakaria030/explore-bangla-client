@@ -40,7 +40,7 @@ const PackageDetails = () => {
                                 <SectionTitle title={"About the tour"}></SectionTitle>
                             </div>
 
-                            <div className="flex justify-between">
+                            <div className="flex flex-col md:flex-row md:justify-between gap-5">
                                 <div className="overflow-x-auto ">
                                     <table className="table">
                                         <tbody>

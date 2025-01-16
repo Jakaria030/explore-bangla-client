@@ -12,6 +12,7 @@ import TourGuideRoute from "./TourGuideRoute";
 import TouristRoute from "./TouristRoute";
 import RoleBaseRedirect from "../dashboard/components/RoleBaseRedirect";
 import PackageDetails from "../pages/components/PackageDetails";
+import AllTrips from "../pages/AllTrips/AllTrips";
 
 export const router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/trips",
-                element: <h1>trips Page</h1>
+                element: <AllTrips></AllTrips>
             },
             {
                 path: "/about",
