@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useSinglePackage from "../../hooks/useSinglePackage";
 import SectionTitle from "./SectionTitle";
+import { FaArrowDown } from "react-icons/fa";
 
 const PackageDetails = () => {
     const { id } = useParams();
@@ -13,7 +14,7 @@ const PackageDetails = () => {
     return (
         <>
             {
-                !isSinglePackageLoading && <section className="space-y-8 md:space-y-16">
+                !isSinglePackageLoading && <section className="space-y-8 md:space-y-16 mb-8 md:mb-16">
                     {/* gallary section */}
                     <section className="max-w-8xl mx-auto px-5">
                         <div className="my-8">
@@ -56,8 +57,12 @@ const PackageDetails = () => {
                                                 <td>: {singlePackage.tourType}</td>
                                             </tr>
                                             <tr>
-                                                <th>Members:</th>
+                                                <th>Members</th>
                                                 <td>: {singlePackage.members} person</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Durations</th>
+                                                <td>: {singlePackage.duration}</td>
                                             </tr>
                                             <tr>
                                                 <th>Package Price</th>
@@ -81,7 +86,24 @@ const PackageDetails = () => {
                         </section>
                     </section>
 
-                    
+                    {/* tour plan */}
+                    <section className="max-w-8xl mx-auto px-5">
+                        {/* section title */}
+                        <div className="my-8">
+                            <SectionTitle title={"Our Tour Plan"}></SectionTitle>
+                        </div>
+
+                        {
+                            tourPlan.map((plan, indx) => <div key={indx}>
+                                {indx !== 0 && <FaArrowDown className="text-2xl text-center mx-auto text-teal" />}
+                                <div className="bg-teal/30 py-5 rounded-sm space-y-2">
+                                    <div className="bg-teal text-white inline-block px-4 py-2 shadow-xl text-lg font-bold">Day : {indx+1}</div>
+                                    <div className="px-5">{plan}</div>
+                                </div>
+                            </div>)
+                        }
+
+                    </section>
 
                 </section>
             }
