@@ -21,31 +21,40 @@ const AddPackage = () => {
 
     const handlePackage = async (data) => {
         // console.log(data);
+
         try {
             setIsLoading(true);
 
-            const inclusion = data.inclusion.split(",").map(item => item.trim());
+            const inclusions = data.inclusion.split(",").map(item => item.trim());
 
-            const imageFile = { image: data.image[0] };
-            const imgbbRes = await imageUpload(imageFile);
+            let images = [];
+            for (let image of data.images) {
+                const imgbbRes = await imageUpload({image});
 
-            if (imgbbRes.data.success) {
-                const newPackage = {
-                    name: data.name,
-                    duration: data.duration,
-                    price: parseFloat(data.price),
-                    member: parseInt(data.member),
-                    image: imgbbRes.data.data?.display_url,
-                    inclusion,
-                    tourPlan: data.tourPlan
-                };
+                if (imgbbRes.data.success) {
+                    images.push(imgbbRes.data.data?.display_url);
+                }
+            }            
 
-                // package upload in database
-                await axiosSecure.post("/packages", newPackage);
+            // create package data
+            const newPackage = {
+                placeName: data.placeName,
+                tourType: data.tourType,
+                tripTitle: data.tripTitle,
+                duration: data.duration,
+                price: parseFloat(data.price),
+                members: parseInt(data.member),
+                images,
+                inclusions,
+                tourPlan: data.tourPlan
+            };
 
-                reset();
-                successAlert("Package is saved!");
-            }
+            // package upload in database
+            await axiosSecure.post("/packages", newPackage);
+
+            reset();
+            successAlert("Package is saved!");
+
         } catch (error) {
             errorAlert("Package is not saved!");
         } finally {
@@ -66,11 +75,32 @@ const AddPackage = () => {
                         <div className="w-full">
                             <label className="form-control w-full">
                                 <div className="label">
-                                    <span className="label-text">Tour Name</span>
+                                    <span className="label-text">Place Name</span>
                                 </div>
-                                <input type="text" {...register("name", { required: "Name is required." })} placeholder="e.g, Cox's Bazar Beach Escape" className="input input-bordered w-full" />
+                                <input type="text" {...register("placeName", { required: "Place name is required." })} placeholder="e.g, Cox's Bazar" className="input input-bordered w-full" />
                             </label>
-                            <p className="text-red-500">{errors.name?.message}</p>
+                            <p className="text-red-500">{errors.placeName?.message}</p>
+                        </div>
+                        <div className="w-full">
+                            <label className="form-control w-full">
+                                <div className="label">
+                                    <span className="label-text">Tour Type</span>
+                                </div>
+                                <input type="text" {...register("tourType", { required: "Tour type is required." })} placeholder="e.g, Beach Adventure" className="input input-bordered w-full" />
+                            </label>
+                            <p className="text-red-500">{errors.tourType?.message}</p>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row md:gap-5">
+                        <div className="w-full">
+                            <label className="form-control w-full">
+                                <div className="label">
+                                    <span className="label-text">Trip Title</span>
+                                </div>
+                                <input type="text" {...register("tripTitle", { required: "Trip title is required." })} placeholder="e.g, Serene Beaches Getaway: Cox's Bazar Adventure" className="input input-bordered w-full" />
+                            </label>
+                            <p className="text-red-500">{errors.tripTitle?.message}</p>
                         </div>
                         <div className="w-full">
                             <label className="form-control w-full">
@@ -82,11 +112,12 @@ const AddPackage = () => {
                             <p className="text-red-500">{errors.duration?.message}</p>
                         </div>
                     </div>
+
                     <div className="flex flex-col md:flex-row md:gap-5">
                         <div className="w-full">
                             <label className="form-control w-full">
                                 <div className="label">
-                                    <span className="label-text">Price</span>
+                                    <span className="label-text">Price(USD)</span>
                                 </div>
                                 <input type="number" {...register("price", { required: "Price is required.", min: { value: 1, message: "Price must be greater than or equal to one." } })} placeholder="e.g, 150" className="input input-bordered w-full" />
                             </label>
@@ -102,15 +133,17 @@ const AddPackage = () => {
                             <p className="text-red-500">{errors.member?.message}</p>
                         </div>
                     </div>
+
                     <div className="w-full">
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Image</span>
+                                <span className="label-text capitalize">Upload multiple tourist destination images</span>
                             </div>
-                            <input type="file" {...register("image", { required: "Image is required." })} className="border border-base-300 py-2 w-full" />
+                            <input type="file" {...register("images", { required: "Image is required." })} multiple className="border border-base-300 py-2 w-full" />
                         </label>
-                        <p className="text-red-500">{errors.image?.message}</p>
+                        <p className="text-red-500">{errors.images?.message}</p>
                     </div>
+
                     <div className="w-full">
                         <label className="form-control w-full">
                             <div className="label">
@@ -142,9 +175,11 @@ const AddPackage = () => {
                             </label>
                         ))}
                     </div>
+
                     <div className="">
                         <button type="button" onClick={() => append("Write tour plan.")} className="px-4 py-2 rounded-md text-white bg-blue-500">Add Day</button>
                     </div>
+
                     <div className="flex flex-row pt-5">
                         <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal/80 w-full">{isLoading ? <Spinner></Spinner> : "Save Package"}</button>
                     </div>

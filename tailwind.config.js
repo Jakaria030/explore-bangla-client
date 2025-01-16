@@ -19,6 +19,9 @@ export default {
         "gray": "#F5F5F5",
         "orange": "#FF8C42"
       },
+      backgroundImage: {
+        'banner': 'url("/src/assets/banner.jpg")'
+      },
     },
   },
   plugins: [require("daisyui")],
