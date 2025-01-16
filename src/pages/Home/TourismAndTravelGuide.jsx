@@ -1,15 +1,14 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import OurPackages from '../components/OurPackages';
+import SectionTitle from '../components/SectionTitle';
 
 const TourismAndTravelGuide = () => {
 
     return (
         <section className="max-w-8xl mx-auto px-5">
-            <div className="mb-8">
-                <h1 className="text-2xl md:text-3xl font-bold text-charcoal text-center">Tourism and Travel Guide</h1>
-                <div className='w-32 h-[2px] bg-teal mx-auto'></div>
-            </div>
+            <SectionTitle title={"Tourism and Travel Guide"}></SectionTitle>
+
             <Tabs>
                 <TabList>
                     <Tab>Our Packages</Tab>

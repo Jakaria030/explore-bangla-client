@@ -71,7 +71,7 @@ const Register = () => {
     return (
         <section className="max-w-5xl mx-auto px-5 py-5 sm:py-10 md:py-12 lg:py-16">
             <div className="border border-teal grid grid-cols-1 md:grid-cols-2">
-                <figure className="relative">
+                <figure className="relative z-0">
                     <img className="max-h-fit" src={regisertImage} />
                     <div className="absolute w-full top-1/2 -translate-y-1/2 bg-black/30 p-5">
                         <h2 className="text-2xl text-white font-bold text-center "> Join the Journey - Start Your Adventure Today!</h2>

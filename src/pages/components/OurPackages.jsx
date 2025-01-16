@@ -4,33 +4,6 @@ import useRandomPackages from "../../hooks/useRandomPackages";
 
 const OurPackages = () => {
     const { randomPackages, isRandomPackagesLoading } = useRandomPackages();
-    // const isRandomPackagesLoading = false;
-    // const randomPackages = [
-    //     {
-    //       _id: "6788f475cc38ccdc1233a873",
-    //       placeName: "Srimongal, Sylhet",
-    //       tourType: "Nature & Tea Garden Tour (Single Package)",
-    //       "tripTitle": "Experience the Tranquility of Srimongal’s Tea Gardens",
-    //       price: 70,
-    //       image: "https://i.ibb.co.com/DR4g93M/images-5.jpg"
-    //     },
-    //     {
-    //       _id: "6788f475cc38ccdc1233a873",
-    //       placeName: "Srimongal, Sylhet",
-    //       tourType: "Nature & Tea Garden Tour (Single Package)",
-    //       "tripTitle": "Experience the Tranquility of Srimongal’s Tea Gardens",
-    //       price: 70,
-    //       image: "https://i.ibb.co.com/DR4g93M/images-5.jpg"
-    //     },
-    //     {
-    //       _id: "6788f475cc38ccdc1233a873",
-    //       placeName: "Srimongal, Sylhet",
-    //       tourType: "Nature & Tea Garden Tour (Single Package)",
-    //       "tripTitle": "Experience the Tranquility of Srimongal’s Tea Gardens",
-    //       price: 70,
-    //       image: "https://i.ibb.co.com/DR4g93M/images-5.jpg"
-    //     }
-    //   ]
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10 py-5">

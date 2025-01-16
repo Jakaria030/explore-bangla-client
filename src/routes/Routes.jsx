@@ -11,6 +11,7 @@ import AdminRoute from "./AdminRoute";
 import TourGuideRoute from "./TourGuideRoute";
 import TouristRoute from "./TouristRoute";
 import RoleBaseRedirect from "../dashboard/components/RoleBaseRedirect";
+import PackageDetails from "../pages/components/PackageDetails";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>
+            },
+            {
+                path: "/package-details/:id",
+                element: <PackageDetails></PackageDetails>
             },
             {
                 path: "/community",

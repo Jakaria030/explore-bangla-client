@@ -75,7 +75,7 @@ const Navbar = () => {
             </div>
 
             {
-                isOpen && <div className=" absolute min-h-screen top-0 w-[320px] bg-base-300 md:hidden p-5">
+                isOpen && <div className=" absolute min-h-screen top-0 w-[320px] bg-base-300 md:hidden p-5 z-50">
                     <div>
                         <button onClick={() => setIsOpen(false)} className="md:hidden">
                             <MdClose className="text-3xl text-charcoal" />
