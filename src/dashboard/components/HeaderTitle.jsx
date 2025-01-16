@@ -6,7 +6,7 @@ const HeaderTitle = ({ title }) => {
             <label htmlFor="my-drawer-2" className="drawer-button lg:hidden text-left">
                 <MdMenu className="text-3xl text-black "></MdMenu>
             </label>
-            <h2 className="text-2xl mx-auto text-center text-white uppercase font-bold">{title}</h2>
+            <h2 className="text-2xl mx-auto text-center text-white capitalize font-bold">{title}</h2>
         </section>
     );
 };

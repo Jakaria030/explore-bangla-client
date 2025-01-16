@@ -13,6 +13,7 @@ import TouristRoute from "./TouristRoute";
 import RoleBaseRedirect from "../dashboard/components/RoleBaseRedirect";
 import PackageDetails from "../pages/components/PackageDetails";
 import AllTrips from "../pages/AllTrips/AllTrips";
+import TouristManageProfile from "../dashboard/TouristPage/TouristManageProfile/TouristManageProfile";
 
 export const router = createBrowserRouter([
     {
@@ -60,7 +61,7 @@ export const router = createBrowserRouter([
             // tourist routes
             {
                 path: "tourist-manage-profile",
-                element: <TouristRoute><h1>tourist-manage-profile</h1></TouristRoute>
+                element: <TouristRoute><TouristManageProfile></TouristManageProfile></TouristRoute>
             },
             {
                 path: "tourist-my-bookings",

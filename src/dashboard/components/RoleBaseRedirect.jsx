@@ -1,21 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Navigate } from "react-router-dom";
+import userUserRole from "../../hooks/userUserRole";
 
 const RoleBaseRedirect = () => {
-    const {user} = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const {userRole, isUserRoleLoading} = userUserRole();
 
-    const {data: userRole, isLoading} = useQuery({
-        queryKey: ["role", user?.email],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/users/role?email=${user?.email}`);
-            return res.data?.role;
-        }
-    });
-
-    if(isLoading) return;
+    if(isUserRoleLoading) return;
 
     if (userRole === "tourist") {
         return <Navigate to="/dashboard/tourist-manage-profile" />;
