@@ -18,6 +18,7 @@ import JoinAsTourGuide from "../dashboard/TouristPage/JoinAsTourGuide/JoinAsTour
 import ManageCandidates from "../dashboard/AdminPage/ManageCandidates/ManageCandidates";
 import TouristAddStory from "../dashboard/TouristPage/TouristAddStory/TouristAddStory";
 import TouristMangeStory from "../dashboard/TouristPage/TouristManageStory/TouristMangeStory";
+import StoryUpdates from "../dashboard/components/StoryUpdates";
 
 export const router = createBrowserRouter([
     {
@@ -77,7 +78,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "story-edit/tourist/:id",
-                element: <TouristRoute><h1>hello</h1></TouristRoute>
+                element: <TouristRoute><StoryUpdates></StoryUpdates></TouristRoute>
             },
             {
                 path: "tourist-add-stories",
