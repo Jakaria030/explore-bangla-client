@@ -69,7 +69,7 @@ const AddPackage = () => {
             <HeaderTitle title={"Add package form"}></HeaderTitle>
 
             {/* form */}
-            <div className="max-w-5xl mx-auto px-5 py-10">
+            <div className="max-w-8xl mx-auto px-5 my-8 md:my-16">
                 <form onSubmit={handleSubmit(handlePackage)} className="border border-slate-500 space-y-2 p-5">
                     <div className="flex flex-col md:flex-row md:gap-5">
                         <div className="w-full">

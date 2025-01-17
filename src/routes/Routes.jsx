@@ -15,6 +15,7 @@ import PackageDetails from "../pages/components/PackageDetails";
 import AllTrips from "../pages/AllTrips/AllTrips";
 import TouristManageProfile from "../dashboard/TouristPage/TouristManageProfile/TouristManageProfile";
 import JoinAsTourGuide from "../dashboard/TouristPage/JoinAsTourGuide/JoinAsTourGuide";
+import ManageCandidates from "../dashboard/AdminPage/ManageCandidates/ManageCandidates";
 
 export const router = createBrowserRouter([
     {
@@ -78,7 +79,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: "tourist-join-as-tour-guid",
-                element: <TouristRoute><JoinAsTourGuide></JoinAsTourGuide></TouristRoute>
+                element: <TouristRoute><JoinAsTourGuide>
+                </JoinAsTourGuide></TouristRoute>
             },
 
             // tour guid routes
@@ -114,7 +116,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "admin-manage-candidates",
-                element: <AdminRoute><h1>admin-manage-candidates</h1></AdminRoute>
+                element: <AdminRoute><ManageCandidates></ManageCandidates></AdminRoute>
             },
         ],
     }

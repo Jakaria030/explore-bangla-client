@@ -3,14 +3,14 @@ import useAuth from "../../../hooks/useAuth";
 import userUserRole from "../../../hooks/userUserRole";
 import HeaderTitle from "../../components/HeaderTitle";
 import { imageUpload } from "../../../utilities/imageUpload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { errorAlert, successAlert } from "../../../toastify/toastify";
 import Spinner from "../../../components/Spinner";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const TouristManageProfile = () => {
-    const { user, updateUserProfile, loading } = useAuth();
+    const { user, setUser, updateUserProfile, loading } = useAuth();
     const { userRole, isUserRoleLoading } = userUserRole();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -19,7 +19,7 @@ const TouristManageProfile = () => {
 
     
     const handleUpdateForm = async (data) => {
-        console.log(data);
+        // console.log(data);
 
         try {
             setIsLoading(true);
@@ -36,9 +36,8 @@ const TouristManageProfile = () => {
                 }
             }
 
-
-            // TODO: Something wrong here
             await updateUserProfile(updatedData);
+            setUser((prev) => {return {...prev, displayName:updatedData.displayName, photoURL:updatedData.photoURL}});
 
             const updateUser = {
                 name: updatedData.displayName,

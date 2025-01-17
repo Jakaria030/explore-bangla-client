@@ -48,7 +48,7 @@ const ManageUsers = () => {
             </div>
 
             {/* user table */}
-            <div className="max-w-5xl mx-auto px-5">
+            <div className="max-w-8xl mx-auto px-5">
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
@@ -64,7 +64,7 @@ const ManageUsers = () => {
                         <tbody>
                             {!isLoading &&
                                 users.map((user, indx) => <tr key={indx} className="hover:bg-teal/20">
-                                    <td>{indx + 1}</td>
+                                    <td>{(indx + 1) + 10*(page-1)}</td>
                                     <td>
                                         <div className="size-12 rounded-md">
                                             <img className="rounded-md" src={user.image} />
@@ -72,7 +72,7 @@ const ManageUsers = () => {
                                     </td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.role}</td>
+                                    <td className="capitalize">{user.role}</td>
                                 </tr>
                                 )
                             }
@@ -85,7 +85,7 @@ const ManageUsers = () => {
             </div>
 
             {/* pagination */}
-            <div className="max-w-5xl mx-auto px-5 py-10">
+            <div className="max-w-8xl mx-auto px-5 py-10">
                 <div className="flex justify-between items-center">
                     <button onClick={handlPrev} disabled={page === 1} className={` ${page===1 && "cursor-not-allowed opacity-50"} flex items-center bg-slate-900 px-4 py-2 text-white`}><MdKeyboardArrowLeft className="text-2xl" />Prev</button>
                     <button onClick={handleNext} disabled={users.length < 10} className={`${users.length < 10 && "cursor-not-allowed opacity-50"} flex items-center bg-slate-900 px-4 py-2 text-white`}>Next<MdOutlineKeyboardArrowRight className="text-2xl" /></button>

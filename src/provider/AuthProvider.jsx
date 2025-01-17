@@ -76,7 +76,7 @@ const AuthProvider = ({ children }) => {
             unsubscribe();
         };
 
-    }, [user, setUser])
+    }, [user, setUser, updateProfile])
 
 
     // auth informations

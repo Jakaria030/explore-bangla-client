@@ -21,9 +21,7 @@ const JoinAsTourGuide = () => {
 
             const application = {
                 ...data,
-                email: user.email,
-                name: user.displayName,
-                role: 'tourist'
+                email: user.email
             };
 
             const res = await axiosSecure.post(`/applications?email=${user?.email}`, application);
@@ -51,7 +49,7 @@ const JoinAsTourGuide = () => {
             <HeaderTitle title={"Join As Tour Guide"}></HeaderTitle>
 
             {/* form */}
-            {user && <div className="max-w-3xl mx-auto px-5 py-10">
+            {user && <div className="max-w-5xl mx-auto px-5 my-8 md:my-16">
                 <form onSubmit={handleSubmit(handleApplication)} className="border border-slate-500 space-y-2 p-5">
                     <div className="w-full">
                         <label className="form-control w-full">
