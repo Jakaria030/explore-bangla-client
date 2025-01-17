@@ -16,6 +16,7 @@ import AllTrips from "../pages/AllTrips/AllTrips";
 import TouristManageProfile from "../dashboard/TouristPage/TouristManageProfile/TouristManageProfile";
 import JoinAsTourGuide from "../dashboard/TouristPage/JoinAsTourGuide/JoinAsTourGuide";
 import ManageCandidates from "../dashboard/AdminPage/ManageCandidates/ManageCandidates";
+import TouristAddStory from "../dashboard/TouristPage/TouristAddStory/TouristAddStory";
 
 export const router = createBrowserRouter([
     {
@@ -75,12 +76,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "tourist-add-stories",
-                element: <TouristRoute><h1>tourist-add-stories</h1></TouristRoute>
+                element: <TouristRoute><TouristAddStory></TouristAddStory></TouristRoute>
             },
             {
                 path: "tourist-join-as-tour-guid",
-                element: <TouristRoute><JoinAsTourGuide>
-                </JoinAsTourGuide></TouristRoute>
+                element: <TouristRoute><JoinAsTourGuide></JoinAsTourGuide></TouristRoute>
             },
 
             // tour guid routes

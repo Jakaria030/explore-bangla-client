@@ -79,7 +79,7 @@ const AddPackage = () => {
                                 </div>
                                 <input type="text" {...register("placeName", { required: "Place name is required." })} placeholder="e.g, Cox's Bazar" className="input input-bordered w-full" />
                             </label>
-                            <p className="text-red-500">{errors.placeName?.message}</p>
+                            <p className="text-red-500 mt-2">{errors.placeName?.message}</p>
                         </div>
                         <div className="w-full">
                             <label className="form-control w-full">
@@ -88,7 +88,7 @@ const AddPackage = () => {
                                 </div>
                                 <input type="text" {...register("tourType", { required: "Tour type is required." })} placeholder="e.g, Beach Adventure" className="input input-bordered w-full" />
                             </label>
-                            <p className="text-red-500">{errors.tourType?.message}</p>
+                            <p className="text-red-500 mt-2">{errors.tourType?.message}</p>
                         </div>
                     </div>
 
@@ -100,7 +100,7 @@ const AddPackage = () => {
                                 </div>
                                 <input type="text" {...register("tripTitle", { required: "Trip title is required." })} placeholder="e.g, Serene Beaches Getaway: Cox's Bazar Adventure" className="input input-bordered w-full" />
                             </label>
-                            <p className="text-red-500">{errors.tripTitle?.message}</p>
+                            <p className="text-red-500 mt-2">{errors.tripTitle?.message}</p>
                         </div>
                         <div className="w-full">
                             <label className="form-control w-full">
@@ -109,7 +109,7 @@ const AddPackage = () => {
                                 </div>
                                 <input type="text" {...register("duration", { required: "Duration is required." })} placeholder="e.g, 2 Days/ 3 Nights" className="input input-bordered w-full" />
                             </label>
-                            <p className="text-red-500">{errors.duration?.message}</p>
+                            <p className="text-red-500 mt-2">{errors.duration?.message}</p>
                         </div>
                     </div>
 
@@ -121,7 +121,7 @@ const AddPackage = () => {
                                 </div>
                                 <input type="number" {...register("price", { required: "Price is required.", min: { value: 1, message: "Price must be greater than or equal to one." } })} placeholder="e.g, 150" className="input input-bordered w-full" />
                             </label>
-                            <p className="text-red-500">{errors.price?.message}</p>
+                            <p className="text-red-500 mt-2">{errors.price?.message}</p>
                         </div>
                         <div className="w-full">
                             <label className="form-control w-full">
@@ -130,7 +130,7 @@ const AddPackage = () => {
                                 </div>
                                 <input type="number" {...register("member", { required: "Member is required.", min: { value: 1, message: "Minimum one member required" } })} placeholder="e.g, 3" className="input input-bordered w-full" />
                             </label>
-                            <p className="text-red-500">{errors.member?.message}</p>
+                            <p className="text-red-500 mt-2">{errors.member?.message}</p>
                         </div>
                     </div>
 
@@ -141,7 +141,7 @@ const AddPackage = () => {
                             </div>
                             <input type="file" {...register("images", { required: "Image is required." })} multiple className="border border-base-300 py-2 w-full" />
                         </label>
-                        <p className="text-red-500">{errors.images?.message}</p>
+                        <p className="text-red-500 mt-2">{errors.images?.message}</p>
                     </div>
 
                     <div className="w-full">
@@ -151,7 +151,7 @@ const AddPackage = () => {
                             </div>
                             <input type="text" {...register("inclusion", { required: "Inclusion is required." })} className="input input-bordered w-full" placeholder="Write each inclusion separated by a comma." />
                         </label>
-                        <p className="text-red-500">{errors.inclusion?.message}</p>
+                        <p className="text-red-500 mt-2">{errors.inclusion?.message}</p>
                     </div>
 
                     <div className="w-full space-y-2">
@@ -170,7 +170,7 @@ const AddPackage = () => {
 
                                 </div>
                                 {errors.tourPlan?.[indx] && (
-                                    <p className="text-red-500 text-sm">{errors.tourPlan[indx]?.message}</p>
+                                    <p className="text-red-500 mt-2 text-sm">{errors.tourPlan[indx]?.message}</p>
                                 )}
                             </label>
                         ))}
