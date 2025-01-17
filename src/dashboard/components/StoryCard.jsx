@@ -50,7 +50,7 @@ const StoryCard = ({ story, userRole, refetch }) => {
     };
 
     return (
-        <div className="border-2 border-slate-500 flex flex-col h-full">
+        <div className="border-2 border-slate-500 flex flex-col">
             <figure>
                 <Swiper
                     centeredSlides={true}
@@ -63,15 +63,15 @@ const StoryCard = ({ story, userRole, refetch }) => {
                 >
                     {story.images.map((image, indx) => (
                         <SwiperSlide key={indx}>
-                            <img className="w-full h-full" src={image} />
+                            <img className="w-full h-60" src={image} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
             </figure>
-            <div className="p-2 space-y-2 flex-1 flex flex-col">
+            <div className="p-2 space-y-2 flex flex-col flex-grow">
                 <h2 className="text-xl font-semibold">{story.title}</h2>
-                <p>{story.story}</p>
-                <div className="flex justify-between items-center mt-auto">
+                <p className='flex-grow'>{story.story}</p>
+                <div className="flex justify-between items-center">
                     <button onClick={() => handleDeleteStory(story._id)} className="px-4 py-2 rounded-sm text-white bg-red-500">{isLoading ? <Spinner></Spinner> : "Delete"}</button>
                     <Link to={`/dashboard/story-edit/${userRole}/${story._id}`}><button className="px-4 py-2 rounded-sm text-white bg-blue-500">Edit</button></Link>
                 </div>
