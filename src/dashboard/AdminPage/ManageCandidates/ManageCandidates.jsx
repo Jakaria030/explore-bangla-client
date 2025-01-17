@@ -10,10 +10,10 @@ import { errorAlert } from "../../../toastify/toastify";
 
 const ManageCandidates = () => {
     const [page, setPage] = useState(1);
-    const { applicants, isApplicantsLoading, refetch} = useApplications(page, 10);
+    const { applicants, isApplicantsLoading, refetch } = useApplications(page, 10);
 
 
-    const {user} = useAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     const handlPrev = () => {
@@ -26,36 +26,65 @@ const ManageCandidates = () => {
         setPage(page + 1);
     };
 
-    const handleDelete = (id) => {
-        // console.log(id);
+
+    const handleAccepted = (applicantEmail, applicantId) => {
+        // console.log(applicantEmail);
 
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't to delete this application!",
+            text: "You want to Accept this application!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, Accept it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await axiosSecure.delete(`/applications/${id}?email=${user?.email}`);
-                if(res.data.acknowledged){
+                const res = await axiosSecure.patch(`/users/${applicantEmail}?email=${user?.email}`);
+                if (res.data.acknowledged) {
+                    await axiosSecure.delete(`/applications/${applicantId}?email=${user?.email}`);
                     Swal.fire({
-                        title: "Deleted!",
-                        text: "Application has been deleted.",
+                        title: "Accepted!",
+                        text: "Application has been Accepted.",
                         icon: "success"
                     });
                     refetch();
-                }else{
-                    errorAlert("Application is not deleted.");
+                } else {
+                    errorAlert("Application is not Accepted.");
                 }
             }
         });
-
-
-
     };
+
+
+    const handleRejected = (id) => {
+        // console.log(id);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to Reject this application!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Reject it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.delete(`/applications/${id}?email=${user?.email}`);
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Application has been Rejected.",
+                        icon: "success"
+                    });
+                    refetch();
+                } else {
+                    errorAlert("Application is not Rejected.");
+                }
+            }
+        });
+    };
+
 
     return (
         <section>
@@ -100,8 +129,8 @@ const ManageCandidates = () => {
                                     <td>{applicant.reason}</td>
                                     <td><a className="px-4 py-2 bg-teal text-white rounded-sm" href={applicant.cvLink}>Show</a></td>
                                     <td className="flex flex-col items-center space-y-2">
-                                        <button className="px-4 py-2 bg-green-500 rounded-sm"><IoMdCheckmarkCircleOutline className="text-xl text-white font-medium" /></button>
-                                        <button onClick={() => handleDelete(applicant._id)} className="px-4 py-2 bg-red-500 rounded-sm"><MdDelete className="text-xl text-white font-medium" /></button>
+                                        <button onClick={() => handleAccepted(applicant.email, applicant._id)} className="px-4 py-2 bg-green-500 rounded-sm"><IoMdCheckmarkCircleOutline className="text-xl text-white font-medium" /></button>
+                                        <button onClick={() => handleRejected(applicant._id)} className="px-4 py-2 bg-red-500 rounded-sm"><MdDelete className="text-xl text-white font-medium" /></button>
                                     </td>
                                 </tr>
                                 )
