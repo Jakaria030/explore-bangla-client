@@ -45,7 +45,7 @@ const TouristManageProfile = () => {
                 image: updatedData.photoURL
             };
 
-            await axiosSecure.patch(`/users?email=${user?.email}`, updateUser);
+            await axiosSecure.patch(`/users/tourist?email=${user?.email}`, updateUser);
 
             successAlert("Profile updated.")
 
@@ -95,7 +95,7 @@ const TouristManageProfile = () => {
                         <input type="email" readOnly {...register("email")} placeholder="Email" defaultValue={user?.email} className="input input-bordered w-full" />
                         <input type="text" readOnly {...register("role")} placeholder="Role" defaultValue={userRole} className="input input-bordered w-full capitalize" />
                         <input type="file" {...register("image")} className="border border-slate-300 rounded-md py-2 w-full" />
-                        <button className="px-4 py-2 bg-teal text-white rounded-sm cursor-pointer">{isLoading ? <Spinner></Spinner> : "Update"}</button>
+                        <button className="w-20 h-10 bg-teal text-white rounded-sm cursor-pointer">{isLoading ? <Spinner></Spinner> : "Update"}</button>
                     </form>
                 </div>
             </dialog>

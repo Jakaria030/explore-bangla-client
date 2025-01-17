@@ -14,6 +14,7 @@ import RoleBaseRedirect from "../dashboard/components/RoleBaseRedirect";
 import PackageDetails from "../pages/components/PackageDetails";
 import AllTrips from "../pages/AllTrips/AllTrips";
 import TouristManageProfile from "../dashboard/TouristPage/TouristManageProfile/TouristManageProfile";
+import JoinAsTourGuide from "../dashboard/TouristPage/JoinAsTourGuide/JoinAsTourGuide";
 
 export const router = createBrowserRouter([
     {
@@ -77,7 +78,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "tourist-join-as-tour-guid",
-                element: <TouristRoute><h1>tourist-join-as-tour-guid</h1></TouristRoute>
+                element: <TouristRoute><JoinAsTourGuide></JoinAsTourGuide></TouristRoute>
             },
 
             // tour guid routes
