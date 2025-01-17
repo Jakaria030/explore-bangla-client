@@ -2,13 +2,14 @@ import { useLocation, useParams } from "react-router-dom";
 import HeaderTitle from "./HeaderTitle";
 import useUpdateStory from "../../hooks/useUpdateStory";
 import SectionTitle from "../../pages/components/SectionTitle";
-import { errorAlert } from "../../toastify/toastify";
+import { errorAlert, successAlert } from "../../toastify/toastify";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Spinner from "../../components/Spinner";
+import { imageUpload } from "../../utilities/imageUpload";
 
 const StoryUpdates = () => {
     const { id } = useParams();
@@ -20,6 +21,7 @@ const StoryUpdates = () => {
 
 
     const { story, isStoryLoading, refetch } = useUpdateStory(id, userRole);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
 
 
@@ -53,31 +55,54 @@ const StoryUpdates = () => {
         }
     };
 
+    const handlePhotoUpload = async (data) => {
+        // console.log(data);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    
+        try {
+            setIsLoading(true);
+            const imageFile = { image: data.image[0] };
+            const imgbbRes = await imageUpload(imageFile);
+
+            const image = imgbbRes.data.data?.display_url;
+
+            const res = await axiosSecure.patch(`/stories/${userRole}/upload-image?email=${user.email}`, { id, image });
+            if (res.data.acknowledged) {
+                successAlert("Image uploaded.");
+                reset();
+                refetch();
+            }
+
+        } catch (error) {
+            errorAlert("Image is not upload.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
     const handleUpdateStory = async (data, storyID) => {
         // console.log(data);
 
-        try{
+        try {
             setIsLoading(true);
             const res = await axiosSecure.patch(`/stories/${userRole}/update-story/${id}?email=${user.email}`, data);
-            if(res.data.acknowledged){
+            if (res.data.acknowledged) {
                 Swal.fire({
                     icon: "success",
                     title: "Your story has been updated.",
                     showConfirmButton: false,
                     timer: 1500
-                  });
-                  refetch();
+                });
+                refetch();
             }
 
-        }catch(error){
+        } catch (error) {
             errorAlert("Story is not updated!");
-        }finally{
+        } finally {
             setIsLoading(false);
         }
     };
+
 
     return (
         <section>
@@ -95,6 +120,26 @@ const StoryUpdates = () => {
                             </div>)
                         }
                     </div>
+
+
+                    {/* Single photo upload */}
+                    <div className="mt-8 md:mt-16">
+                        <SectionTitle title={"Upload a photo for this story"}></SectionTitle>
+                    </div>
+
+                    <form onSubmit={handleSubmit(handlePhotoUpload)} >
+                        <div className="flex items-center justify-between gap-5">
+                            <div className="w-full">
+                                <label className="form-control w-full">
+                                    <input type="file" {...register("image", { required: "Image is required." })} className="border border-base-300 py-2 w-full" />
+                                </label>
+                            </div>
+                            <div>
+                                <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal/80 w-full">{isLoading ? <Spinner></Spinner> : "Update"}</button>
+                            </div>
+                        </div>
+                        <p className="text-red-500 mt-2">{errors.image?.message}</p>
+                    </form>
 
                     {/* form section  */}
                     <div className="mt-8 md:mt-16">
