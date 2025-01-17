@@ -3,10 +3,18 @@ import useApplications from "../../../hooks/useApplications";
 import HeaderTitle from "../../components/HeaderTitle";
 import { MdDelete, MdKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { errorAlert } from "../../../toastify/toastify";
 
 const ManageCandidates = () => {
     const [page, setPage] = useState(1);
-    const { applicants, isApplicantsLoading } = useApplications(page, 10);
+    const { applicants, isApplicantsLoading, refetch} = useApplications(page, 10);
+
+
+    const {user} = useAuth();
+    const axiosSecure = useAxiosSecure();
 
     const handlPrev = () => {
         if (page > 1) {
@@ -16,6 +24,37 @@ const ManageCandidates = () => {
 
     const handleNext = () => {
         setPage(page + 1);
+    };
+
+    const handleDelete = (id) => {
+        // console.log(id);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't to delete this application!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.delete(`/applications/${id}?email=${user?.email}`);
+                if(res.data.acknowledged){
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Application has been deleted.",
+                        icon: "success"
+                    });
+                    refetch();
+                }else{
+                    errorAlert("Application is not deleted.");
+                }
+            }
+        });
+
+
+
     };
 
     return (
@@ -34,7 +73,7 @@ const ManageCandidates = () => {
                                 <th>Applicants</th>
                                 <th>Role</th>
                                 <th>Application Title</th>
-                                <th>Reason</th>
+                                <th className="min-w-96">Reason</th>
                                 <th className="text-center">CV</th>
                                 <th className="text-center">Accep/Reject</th>
                             </tr>
@@ -47,7 +86,7 @@ const ManageCandidates = () => {
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
                                                 <div className="rounded-lg h-12 w-12">
-                                                    <img src={applicant.image}/>                                                        
+                                                    <img src={applicant.image} />
                                                 </div>
                                             </div>
                                             <div>
@@ -62,7 +101,7 @@ const ManageCandidates = () => {
                                     <td><a className="px-4 py-2 bg-teal text-white rounded-sm" href={applicant.cvLink}>Show</a></td>
                                     <td className="flex flex-col items-center space-y-2">
                                         <button className="px-4 py-2 bg-green-500 rounded-sm"><IoMdCheckmarkCircleOutline className="text-xl text-white font-medium" /></button>
-                                        <button className="px-4 py-2 bg-red-500 rounded-sm"><MdDelete className="text-xl text-white font-medium" /></button>
+                                        <button onClick={() => handleDelete(applicant._id)} className="px-4 py-2 bg-red-500 rounded-sm"><MdDelete className="text-xl text-white font-medium" /></button>
                                     </td>
                                 </tr>
                                 )

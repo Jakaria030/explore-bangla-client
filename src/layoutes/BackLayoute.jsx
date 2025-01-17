@@ -22,7 +22,7 @@ const BackLayoute = () => {
                 <Outlet></Outlet>
             </div>
 
-            <div className="drawer-side ">
+            <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <div className="menu text-charcoal min-h-full w-64 sm:w-80 bg-teal/80 backdrop-blur-lg">
                     {/* logo */}

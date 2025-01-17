@@ -6,7 +6,7 @@ const useApplications = (page=1, limit=10) => {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const {data: applicants = [], isLoading: isApplicantsLoading} = useQuery({
+    const {data: applicants = [], isLoading: isApplicantsLoading, refetch} = useQuery({
         queryKey: ["applicants", page],
         queryFn: async () => {
             const res = await axiosSecure.get(`/applications?email=${user?.email}&page=${page}&limit=${limit}`);
@@ -14,7 +14,7 @@ const useApplications = (page=1, limit=10) => {
         }
     });
 
-    return {applicants, isApplicantsLoading};
+    return {applicants, isApplicantsLoading, refetch};
 };
 
 export default useApplications;
