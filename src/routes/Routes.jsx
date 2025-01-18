@@ -25,6 +25,7 @@ import TourGuideMangeStory from "../dashboard/TourGuidPage/TourGuideManageStory/
 import TourGuideDetailsPage from "../pages/components/TourGuideDetailsPage";
 import Community from "../pages/Community/Community";
 import About from "../pages/About/About";
+import ErrorPage from "../components/ErrorPage";
 
 export const router = createBrowserRouter([
     {
@@ -139,5 +140,9 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><ManageCandidates></ManageCandidates></AdminRoute>
             },
         ],
+    },
+    {
+        path: "*",
+        element: <ErrorPage></ErrorPage>
     }
 ]);
