@@ -21,7 +21,7 @@ const TourGuideDetailsPage = () => {
 
                 <div className="bg-teal/50 p-10 rounded-sm">
                     <div className="flex flex-col justify-center items-center space-y-5">
-                        <figure className="w-72 h-72 rounded-full ring-4 ring-teal">
+                        <figure className="w-52 h-52 md:w-72 md:h-72 rounded-full ring-4 ring-teal">
                             <img className="w-full h-full rounded-full" src={singleUser.image} />
                         </figure>
                         <div className="text-center">
@@ -36,10 +36,10 @@ const TourGuideDetailsPage = () => {
             {/* story section */}
             <section className="mb-8 md:mb-16">
                 <SectionTitle title={"Tour Guide Story"}></SectionTitle>
-                {!isTourGuideStoriesLoading && <div className="space-y-8 md:spy-16">
-                    {
+                {!isTourGuideStoriesLoading && <div className="space-y-8 md:space-y-16">
+                    {tourGuideStories.length > 0 ?
                         tourGuideStories.map(story => <div className="border-2 border-slate-500 grid grid-cols-1 md:grid-cols-5 gap-5 md:gap-10">
-                            <figure className="col-span-2">
+                            <figure className="md:col-span-2">
                                 <Swiper
                                     centeredSlides={true}
                                     autoplay={{
@@ -51,16 +51,16 @@ const TourGuideDetailsPage = () => {
                                 >
                                     {story.images.map((image, indx) => (
                                         <SwiperSlide key={indx}>
-                                            <img className="w-full h-96" src={image} />
+                                            <img className="w-full object-cover h-96" src={image} />
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
                             </figure>
-                            <div className="col-span-3 p-2 space-y-2 my-auto">
+                            <div className="md:col-span-3 p-2 space-y-2 my-auto">
                                 <h2 className="text-xl font-semibold">Title: {story.title}</h2>
                                 <p className='text-justify'>{story.story}</p>
                             </div>
-                        </div>)}
+                        </div>) : <div className="py-4 bg-teal/50 text-black text-lg font-bold text-center">No Story Found!</div>}
                 </div>}
             </section>
         </section>

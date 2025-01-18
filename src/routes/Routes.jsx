@@ -23,6 +23,7 @@ import TourGuideManageProfile from "../dashboard/TourGuidPage/TourGuideManagePro
 import TourGuideAddStory from "../dashboard/TourGuidPage/TourGuideAddStory/TourGuideAddStory";
 import TourGuideMangeStory from "../dashboard/TourGuidPage/TourGuideManageStory/TourGuideMangeStory";
 import TourGuideDetailsPage from "../pages/components/TourGuideDetailsPage";
+import Community from "../pages/Community/Community";
 
 export const router = createBrowserRouter([
     {
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/community",
-                element: <h1>Community Page</h1>
+                element: <Community></Community>
             },
             {
                 path: "/trips",

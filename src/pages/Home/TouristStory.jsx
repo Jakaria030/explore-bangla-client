@@ -47,7 +47,9 @@ const TouristStory = () => {
 
     return (
         <section className="max-w-8xl mx-auto px-5">
+            <div className="md:pb-8">
             <SectionTitle title={"Story of Our Tourist"}></SectionTitle>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-10">
                 {!isStoriesLoading && stories.map(story => <div key={story._id} className="border-2 border-slate-500 flex flex-col">

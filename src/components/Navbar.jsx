@@ -60,7 +60,7 @@ const Navbar = () => {
                                         <img className="rounded-full" src={user.photoURL} />
                                     </button>
 
-                                    <ul tabIndex={0} className="dropdown-content menu bg-teal/80 rounded-b-md z-[1] mt-4 w-60 p-2 text-white shadow">
+                                    <ul tabIndex={0} className="dropdown-content menu bg-teal rounded-b-md z-[1] mt-4 w-60 p-2 text-white shadow">
                                         <li className="text-center">{user.displayName}</li>
                                         <li className="text-center">{user.email}</li>
                                         <hr className="my-1" />
@@ -75,10 +75,10 @@ const Navbar = () => {
             </div>
 
             {
-                isOpen && <div className=" absolute min-h-screen top-0 w-[320px] bg-base-300 md:hidden p-5 z-50">
+                isOpen && <div className=" absolute min-h-screen top-0 w-[320px] bg-teal md:hidden p-5 z-50">
                     <div>
                         <button onClick={() => setIsOpen(false)} className="md:hidden">
-                            <MdClose className="text-3xl text-charcoal" />
+                            <MdClose className="text-3xl text-white" />
                         </button>
                         <ul className="flex flex-col gap-1 ">
                             {links}
