@@ -22,6 +22,7 @@ import StoryUpdates from "../dashboard/components/StoryUpdates";
 import TourGuideManageProfile from "../dashboard/TourGuidPage/TourGuideManageProfile/TourGuideManageProfile";
 import TourGuideAddStory from "../dashboard/TourGuidPage/TourGuideAddStory/TourGuideAddStory";
 import TourGuideMangeStory from "../dashboard/TourGuidPage/TourGuideManageStory/TourGuideMangeStory";
+import TourGuideDetailsPage from "../pages/components/TourGuideDetailsPage";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: "/package-details/:id",
                 element: <PackageDetails></PackageDetails>
+            },
+            {
+                path: "/tour-guide-details/:id",
+                element: <TourGuideDetailsPage></TourGuideDetailsPage>
             },
             {
                 path: "/community",

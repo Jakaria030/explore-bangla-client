@@ -72,9 +72,9 @@ const TouristManageProfile = () => {
                             />
                         </figure>
                         <div>
-                            <h2 className="text-xl font-bold mt-5">{user?.displayName}</h2>
-                            <p className="text-charcoal">{user?.email}</p>
-                            <p className="text-lg text-charcoal capitalize">{userRole}</p>
+                            <h2 className="text-xl font-bold mt-5">Name: {user?.displayName}</h2>
+                            <p className="text-charcoal">Email: {user?.email}</p>
+                            <p className="text-lg text-charcoal capitalize">Role: {userRole}</p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-5">
                                 <button onClick={() => document.getElementById('edit').showModal()} className="px-4 py-2 bg-teal rounded-sm text-white">Edit</button>
                                 <Link to="/dashboard/tourist-join-as-tour-guid"><button className="px-4 py-2 bg-teal rounded-sm text-white">Apply For Tour Guid</button></Link>
