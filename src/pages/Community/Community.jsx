@@ -17,12 +17,12 @@ const Community = () => {
     const handleLoginToShare = () => {
         if (!(user && user?.email)) {
             errorAlert("Please login to share story.");
-            navigate("/login", {state: "/community"});
+            navigate("/login", { state: "/community" });
         }
     }
 
     return (
-        <section className="max-w-8xl mx-auto px-5 my-8 md:my-16">
+        <section className="max-w-8xl mx-auto px-5 mb-8 md:mb-16">
             <div className="my-8">
                 <SectionTitle title={"All Story"}></SectionTitle>
             </div>

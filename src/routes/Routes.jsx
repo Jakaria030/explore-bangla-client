@@ -24,6 +24,7 @@ import TourGuideAddStory from "../dashboard/TourGuidPage/TourGuideAddStory/TourG
 import TourGuideMangeStory from "../dashboard/TourGuidPage/TourGuideManageStory/TourGuideMangeStory";
 import TourGuideDetailsPage from "../pages/components/TourGuideDetailsPage";
 import Community from "../pages/Community/Community";
+import About from "../pages/About/About";
 
 export const router = createBrowserRouter([
     {
@@ -52,7 +53,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/about",
-                element: <h1>about Page</h1>
+                element: <About></About>
             },
             {
                 path: "/login",
