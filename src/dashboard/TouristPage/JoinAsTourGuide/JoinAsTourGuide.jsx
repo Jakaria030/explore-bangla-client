@@ -49,7 +49,7 @@ const JoinAsTourGuide = () => {
             <HeaderTitle title={"Join As Tour Guide"}></HeaderTitle>
 
             {/* form */}
-            {user && <div className="max-w-5xl mx-auto px-5 my-8 md:my-16">
+            {user && <div className="max-w-8xl mx-auto px-5 my-8 md:my-16">
                 <form onSubmit={handleSubmit(handleApplication)} className="border border-slate-500 space-y-2 p-5">
                     <div className="w-full">
                         <label className="form-control w-full">

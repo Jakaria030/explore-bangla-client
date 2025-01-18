@@ -19,6 +19,7 @@ import ManageCandidates from "../dashboard/AdminPage/ManageCandidates/ManageCand
 import TouristAddStory from "../dashboard/TouristPage/TouristAddStory/TouristAddStory";
 import TouristMangeStory from "../dashboard/TouristPage/TouristManageStory/TouristMangeStory";
 import StoryUpdates from "../dashboard/components/StoryUpdates";
+import TourGuideManageProfile from "../dashboard/TourGuidPage/TourGuideManageProfile/TourGuideManageProfile";
 
 export const router = createBrowserRouter([
     {
@@ -92,7 +93,7 @@ export const router = createBrowserRouter([
             // tour guid routes
             {
                 path: "tour-guide-manage-profile",
-                element: <TourGuideRoute><h1>tour-guide-manage-profile</h1></TourGuideRoute>
+                element: <TourGuideRoute><TourGuideManageProfile></TourGuideManageProfile></TourGuideRoute>
             },
             {
                 path: "tour-guide-my-assigned-tours",

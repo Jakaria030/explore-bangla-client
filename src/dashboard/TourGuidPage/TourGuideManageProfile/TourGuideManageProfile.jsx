@@ -1,18 +1,19 @@
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import userUserRole from "../../../hooks/userUserRole";
-import HeaderTitle from "../../components/HeaderTitle";
+import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { imageUpload } from "../../../utilities/imageUpload";
-import { useState } from "react";
 import { errorAlert, successAlert } from "../../../toastify/toastify";
 import Spinner from "../../../components/Spinner";
-import { Link } from "react-router-dom";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import HeaderTitle from "../../components/HeaderTitle";
 
-const TouristManageProfile = () => {
+
+const TourGuideManageProfile = () => {
     const { user, setUser, updateUserProfile, loading } = useAuth();
     const { userRole, isUserRoleLoading } = userUserRole();
     const [isLoading, setIsLoading] = useState(false);
+
 
     const { register, handleSubmit, reset } = useForm();
     const axiosSecure = useAxiosSecure();
@@ -44,13 +45,13 @@ const TouristManageProfile = () => {
                 image: updatedData.photoURL
             };
 
+            await axiosSecure.patch(`/users/tour-guide/profile-update?email=${user?.email}`, updateUser);
 
-            await axiosSecure.patch(`/users/tourist/profile-update?email=${user?.email}`, updateUser);
-            
             successAlert("Profile updated.")
 
             reset();
         } catch (error) {
+            console.log(error);
             errorAlert("Profile is not updated.");
         } finally {
             setIsLoading(false);
@@ -75,8 +76,7 @@ const TouristManageProfile = () => {
                             <h2 className="text-xl font-bold mt-5">{user?.displayName}</h2>
                             <p className="text-lg text-charcoal capitalize">{userRole}</p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-5">
-                                <button onClick={() => document.getElementById('edit').showModal()} className="px-4 py-2 bg-teal rounded-sm text-white">Edit</button>
-                                <Link to="/dashboard/tourist-join-as-tour-guid"><button className="px-4 py-2 bg-teal rounded-sm text-white">Apply For Tour Guid</button></Link>
+                                <button onClick={() => document.getElementById('edit').showModal()} className="px-6 py-2 bg-teal rounded-sm text-white">Edit</button>
                             </div>
                         </div>
                     </div>
@@ -103,4 +103,4 @@ const TouristManageProfile = () => {
     );
 };
 
-export default TouristManageProfile;
+export default TourGuideManageProfile;
