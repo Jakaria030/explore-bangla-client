@@ -17,11 +17,11 @@ const StoryUpdates = () => {
 
     const location = useLocation();
     const userRole = location.pathname.split('/')[3];
-    const [isLoading, setIsLoading] = useState(false);
+    const [isPhotoLoading, setIsPhotoLoading] = useState(false);
+    const [isUploadStoryLoading, setIsUploadStoryLoading] = useState(false);
 
 
     const { story, isStoryLoading, refetch } = useUpdateStory(id, userRole);
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
 
 
@@ -55,11 +55,12 @@ const StoryUpdates = () => {
         }
     };
 
+    const { register: registerPhoto, handleSubmit: handlePhotoSubmit, reset:resetPhoto, formState: { errors: photoErr } } = useForm();
     const handlePhotoUpload = async (data) => {
         // console.log(data);
 
         try {
-            setIsLoading(true);
+            setIsPhotoLoading(true);
             const imageFile = { image: data.image[0] };
             const imgbbRes = await imageUpload(imageFile);
 
@@ -68,23 +69,23 @@ const StoryUpdates = () => {
             const res = await axiosSecure.patch(`/stories/${userRole}/upload-image?email=${user.email}`, { id, image });
             if (res.data.acknowledged) {
                 successAlert("Image uploaded.");
-                reset();
+                resetPhoto();
                 refetch();
             }
 
         } catch (error) {
             errorAlert("Image is not upload.");
         } finally {
-            setIsLoading(false);
+            setIsPhotoLoading(false);
         }
     };
 
-
+    const { register: registerStory, handleSubmit: handleStorySubmit, formState: { errors: storyErr } } = useForm();
     const handleUpdateStory = async (data, storyID) => {
         // console.log(data);
 
         try {
-            setIsLoading(true);
+            setIsUploadStoryLoading(true);
             const res = await axiosSecure.patch(`/stories/${userRole}/update-story/${id}?email=${user.email}`, data);
             if (res.data.acknowledged) {
                 Swal.fire({
@@ -99,7 +100,7 @@ const StoryUpdates = () => {
         } catch (error) {
             errorAlert("Story is not updated!");
         } finally {
-            setIsLoading(false);
+            setIsUploadStoryLoading(false);
         }
     };
 
@@ -127,34 +128,35 @@ const StoryUpdates = () => {
                         <SectionTitle title={"Upload a photo for this story"}></SectionTitle>
                     </div>
 
-                    <form onSubmit={handleSubmit(handlePhotoUpload)} >
+                    <form onSubmit={handlePhotoSubmit(handlePhotoUpload)} >
                         <div className="flex items-center justify-between gap-5">
                             <div className="w-full">
                                 <label className="form-control w-full">
-                                    <input type="file" {...register("image", { required: "Image is required." })} className="border border-base-300 py-2 w-full" />
+                                    <input type="file" {...registerPhoto("image", { required: "Image is required." })} className="border border-base-300 py-2 w-full" />
                                 </label>
                             </div>
                             <div>
-                                <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal/80 w-full">{isLoading ? <Spinner></Spinner> : "Update"}</button>
+                                <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal/80 w-full">{isPhotoLoading ? <Spinner></Spinner> : "Update"}</button>
                             </div>
                         </div>
-                        <p className="text-red-500 mt-2">{errors.image?.message}</p>
+                        <p className="text-red-500 mt-2">{photoErr.image?.message}</p>
                     </form>
 
                     {/* form section  */}
                     <div className="mt-8 md:mt-16">
                         <SectionTitle title={"Story Updated Form"}></SectionTitle>
                     </div>
+
                     <div className="max-w-8xl mx-auto mb-8 md:mb-16">
-                        <form onSubmit={handleSubmit(handleUpdateStory)} className="border border-slate-500 space-y-2 p-5">
+                        <form onSubmit={handleStorySubmit(handleUpdateStory)} className="border border-slate-500 space-y-2 p-5">
                             <div className="w-full">
                                 <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text">Story Title</span>
                                     </div>
-                                    <input type="text" defaultValue={story?.title} {...register("title", { required: "Title is required." })} placeholder="e.g, My Journey to Saint Martin's Island" className="input input-bordered w-full" />
+                                    <input type="text" defaultValue={story?.title} {...registerStory("title", { required: "Title is required." })} placeholder="e.g, My Journey to Saint Martin's Island" className="input input-bordered w-full" />
                                 </label>
-                                <p className="text-red-500 mt-2">{errors.title?.message}</p>
+                                <p className="text-red-500 mt-2">{storyErr.title?.message}</p>
                             </div>
 
                             <div className="w-full">
@@ -162,13 +164,13 @@ const StoryUpdates = () => {
                                     <div className="label">
                                         <span className="label-text">Story</span>
                                     </div>
-                                    <textarea defaultValue={story?.story} {...register("story", { required: "Story is required." })} className="textarea textarea-bordered" placeholder="Write your story."></textarea>
+                                    <textarea defaultValue={story?.story} {...registerStory("story", { required: "Story is required." })} className="textarea textarea-bordered" placeholder="Write your story."></textarea>
                                 </label>
-                                <p className="text-red-500 mt-2">{errors.story?.message}</p>
+                                <p className="text-red-500 mt-2">{storyErr.story?.message}</p>
                             </div>
 
                             <div className="flex flex-row pt-5">
-                                <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal/80 w-full">{isLoading ? <Spinner></Spinner> : "Update"}</button>
+                                <button type="submit" className="px-4 h-12 rounded-md text-white bg-teal/80 w-full">{isUploadStoryLoading ? <Spinner></Spinner> : "Update"}</button>
                             </div>
                         </form>
                     </div>

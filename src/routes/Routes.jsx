@@ -21,6 +21,7 @@ import TouristMangeStory from "../dashboard/TouristPage/TouristManageStory/Touri
 import StoryUpdates from "../dashboard/components/StoryUpdates";
 import TourGuideManageProfile from "../dashboard/TourGuidPage/TourGuideManageProfile/TourGuideManageProfile";
 import TourGuideAddStory from "../dashboard/TourGuidPage/TourGuideAddStory/TourGuideAddStory";
+import TourGuideMangeStory from "../dashboard/TourGuidPage/TourGuideManageStory/TourGuideMangeStory";
 
 export const router = createBrowserRouter([
     {
@@ -106,7 +107,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "tour-guide-manage-stories",
-                element: <TourGuideRoute><h1>tour-guide-manage-stories</h1></TourGuideRoute>
+                element: <TourGuideRoute><TourGuideMangeStory></TourGuideMangeStory></TourGuideRoute>
+            },
+            {
+                path: "story-edit/tour-guide/:id",
+                element: <TourGuideRoute><StoryUpdates></StoryUpdates></TourGuideRoute>
             },
 
             // admin routes

@@ -30,7 +30,8 @@ const StoryCard = ({ story, userRole, refetch }) => {
                 confirmButtonText: "Yes, delete it!"
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const res = await axiosSecure.delete(`/stories/tourist-stories/${id}?email=${user.email}`);
+                    const res = await axiosSecure.delete(`/stories/${userRole === 'tourist' ? 'tourist-stories' : 'tour-guide-stories'}/${id}?email=${user.email}`);
+      
                     if (res.data.acknowledged) {
                         Swal.fire({
                             title: "Deleted!",
