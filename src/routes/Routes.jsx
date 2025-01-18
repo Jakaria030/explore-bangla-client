@@ -20,6 +20,7 @@ import TouristAddStory from "../dashboard/TouristPage/TouristAddStory/TouristAdd
 import TouristMangeStory from "../dashboard/TouristPage/TouristManageStory/TouristMangeStory";
 import StoryUpdates from "../dashboard/components/StoryUpdates";
 import TourGuideManageProfile from "../dashboard/TourGuidPage/TourGuideManageProfile/TourGuideManageProfile";
+import TourGuideAddStory from "../dashboard/TourGuidPage/TourGuideAddStory/TourGuideAddStory";
 
 export const router = createBrowserRouter([
     {
@@ -101,7 +102,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "tour-guide-add-stories",
-                element: <TourGuideRoute><h1>tour-guide-add-stories</h1></TourGuideRoute>
+                element: <TourGuideRoute><TourGuideAddStory></TourGuideAddStory></TourGuideRoute>
             },
             {
                 path: "tour-guide-manage-stories",
