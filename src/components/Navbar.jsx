@@ -26,7 +26,7 @@ const Navbar = () => {
     };
 
     return (
-        <section className="bg-teal py-5">
+        <section className="bg-teal py-5 sticky top-0 z-50">
             <div className="max-w-8xl mx-auto px-5">
                 <div className="flex items-center justify-between">
                     {/* left side content */}

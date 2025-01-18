@@ -1,6 +1,7 @@
 import Banner from "./Banner";
 import Overview from "./Overview";
 import TourismAndTravelGuide from "./TourismAndTravelGuide";
+import TouristStory from "./TouristStory";
 
 const Home = () => {
     return (
@@ -8,6 +9,7 @@ const Home = () => {
             <Banner></Banner>
             <Overview></Overview>
             <TourismAndTravelGuide></TourismAndTravelGuide>
+            <TouristStory></TouristStory>
         </section>
     );
 };
