@@ -27,6 +27,7 @@ import Community from "../pages/Community/Community";
 import About from "../pages/About/About";
 import ErrorPage from "../components/ErrorPage";
 import TouristMyBookings from "../dashboard/TouristPage/TouristMyBookings/TouristMyBookings";
+import TourGuideMyAssignTour from "../dashboard/TourGuidPage/TourGuideMyAssignTour/TourGuideMyAssignTour";
 
 export const router = createBrowserRouter([
     {
@@ -108,7 +109,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "tour-guide-my-assigned-tours",
-                element: <TourGuideRoute><h1>tour-guide-my-assigned-tours</h1></TourGuideRoute>
+                element: <TourGuideRoute><TourGuideMyAssignTour></TourGuideMyAssignTour></TourGuideRoute>
             },
             {
                 path: "tour-guide-add-stories",

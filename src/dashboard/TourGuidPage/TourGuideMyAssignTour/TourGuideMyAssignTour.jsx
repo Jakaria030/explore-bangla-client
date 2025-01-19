@@ -1,19 +1,16 @@
 import { useState } from "react";
-import useGetBookingInfo from "../../../hooks/useGetBookingInfo";
-import { MdKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
-import HeaderTitle from "../../components/HeaderTitle";
-import { format } from "date-fns";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import { errorAlert } from "../../../toastify/toastify";
-import Swal from "sweetalert2";
+import HeaderTitle from "../../components/HeaderTitle";
+import useGetBookingInfoForTourGuide from "../../../hooks/useGetBookingInfoForTourGuide";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { format } from "date-fns";
+import { MdKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-const TouristMyBookings = () => {
+const TourGuideMyAssignTour = () => {
     const { user, loading } = useAuth();
     const [page, setPage] = useState(1);
-    const { bookingDetails, isBookingDetailsLoading, refetch } = useGetBookingInfo(page, 10);
+    const { bookingDetails, isBookingDetailsLoading, refetch } = useGetBookingInfoForTourGuide(page, 10);
     const axiosSecure = useAxiosSecure();
-
 
     if (isBookingDetailsLoading || loading) return;
 
@@ -27,46 +24,18 @@ const TouristMyBookings = () => {
         setPage(page + 1);
     };
 
-    const handlePayMent = () => {
-        console.log('hello');
+    const handleAccept = (id) => {
+        console.log(id);
     };
 
-    const handleCancel = (bookingID) => {
-        // console.log(bookingID);
-        try {
-
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You want to delete this booking.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-
-                    const res = await axiosSecure.delete(`/bookings/delete-booking?email=${user?.email}&bookingID=${bookingID}`);
-                    if (res.data.acknowledged) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your booking has been deleted.",
-                            icon: "success"
-                        });
-                        refetch();
-                    }
-                }
-            });
-
-        } catch (error) {
-            errorAlert("Booking is not cancel!");
-        }
-
+    const handleReject = (id) => {
+        console.log(id);
     };
+
 
     return (
         <section>
-            <HeaderTitle title={"My Bookings"}></HeaderTitle>
+            <HeaderTitle title={"My Assigned Tours"}></HeaderTitle>
             {/* booking table */}
             <div className="max-w-8xl mx-auto px-5 mt-8 md:mt-16">
                 <div className="overflow-x-auto">
@@ -76,7 +45,7 @@ const TouristMyBookings = () => {
                             <tr className="text-lg text-black/80 bg-teal/40">
                                 <th>#</th>
                                 <th>Package Name</th>
-                                <th>Tour Guide</th>
+                                <th>Tourist Name</th>
                                 <th>Tour Date</th>
                                 <th>Tour Price</th>
                                 <th>Booking Status</th>
@@ -92,7 +61,7 @@ const TouristMyBookings = () => {
                                     return (<tr key={indx} className="hover:bg-teal/20">
                                         <td>{(indx + 1) + 10 * (page - 1)}</td>
                                         <td>{bookingDetail.tourType}</td>
-                                        <td>{bookingDetail.tourGuideName}</td>
+                                        <td>{bookingDetail.touristName}</td>
                                         <td>{formattedDate}</td>
                                         <td>${bookingDetail.tourPrice}</td>
                                         <td>
@@ -100,8 +69,8 @@ const TouristMyBookings = () => {
                                         </td>
 
                                         <td className="flex flex-col gap-2">
-                                            <button disabled={bookingDetail.status !== 'pending'} onClick={() => handlePayMent(bookingDetail._id)} className={`${bookingDetail.status !== 'pending' && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-green-500 rounded-sm text-white`}>Pay Now</button>
-                                            <button disabled={bookingDetail.status !== 'pending'} onClick={() => handleCancel(bookingDetail._id)} className={`${bookingDetail.status !== 'pending' && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-red-500 rounded-sm text-white`}>Cancel</button>
+                                            <button onClick={() => handleAccept(bookingDetail._id)} disabled={!(bookingDetail.status === 'in-review')}  className={`${!(bookingDetail.status === 'in-review') && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-green-500 rounded-sm text-white`}>Accept</button>
+                                            <button onClick={() => handleReject(bookingDetail._id)} disabled={bookingDetail.status === 'pending'}  className={`${bookingDetail.status === 'pending' && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-red-500 rounded-sm text-white`}>Reject</button>
                                         </td>
                                     </tr>
                                     )
@@ -109,7 +78,7 @@ const TouristMyBookings = () => {
                         </tbody>
                     </table>
                     {
-                        (!isBookingDetailsLoading && bookingDetails.length === 0) && <h1 className="flex items-center justify-center text-2xl text-white py-5 bg-red-400">Booking Not Found</h1>
+                        (!isBookingDetailsLoading && bookingDetails.length === 0) && <h1 className="flex items-center justify-center text-2xl text-white py-5 bg-red-400">Your Assign Tour Not Found!</h1>
                     }
                 </div>
             </div>
@@ -125,4 +94,4 @@ const TouristMyBookings = () => {
     );
 };
 
-export default TouristMyBookings;
+export default TourGuideMyAssignTour;
