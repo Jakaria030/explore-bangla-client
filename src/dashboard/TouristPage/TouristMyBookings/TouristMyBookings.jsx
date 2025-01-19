@@ -3,12 +3,19 @@ import useGetBookingInfo from "../../../hooks/useGetBookingInfo";
 import { MdKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import HeaderTitle from "../../components/HeaderTitle";
 import { format } from "date-fns";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import { errorAlert } from "../../../toastify/toastify";
+import Swal from "sweetalert2";
 
 const TouristMyBookings = () => {
+    const { user, loading } = useAuth();
     const [page, setPage] = useState(1);
-    const { bookingDetails, isBookingDetailsLoading } = useGetBookingInfo(page, 10);
+    const { bookingDetails, isBookingDetailsLoading, refetch } = useGetBookingInfo(page, 10);
+    const axiosSecure = useAxiosSecure();
 
-    if (isBookingDetailsLoading) return;
+
+    if (isBookingDetailsLoading || loading) return;
 
     const handlPrev = () => {
         if (page > 1) {
@@ -24,8 +31,37 @@ const TouristMyBookings = () => {
         console.log('hello');
     };
 
-    const handleCancel = () => {
-        console.log('cencel');
+    const handleCancel = (bookingID) => {
+        // console.log(bookingID);
+        try {
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to delete this booking.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+
+                    const res = await axiosSecure.delete(`/bookings/delete-booking?email=${user?.email}&bookingID=${bookingID}`);
+                    if (res.data.acknowledged) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your booking has been deleted.",
+                            icon: "success"
+                        });
+                        refetch();
+                    }
+                }
+            });
+
+        } catch (error) {
+            errorAlert("Booking is not cancel!");
+        }
+
     };
 
     return (

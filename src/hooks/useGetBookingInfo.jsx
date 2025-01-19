@@ -6,7 +6,7 @@ const useGetBookingInfo = (page, limit) => {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
     
-    const {data: bookingDetails, isLoading: isBookingDetailsLoading} = useQuery({
+    const {data: bookingDetails, isLoading: isBookingDetailsLoading, refetch} = useQuery({
         queryKey: ["booking-info", page],
         queryFn: async () => {
             const res = await axiosSecure.get(`/bookings/booking-details?touristEmail=${user?.email}&page=${page}&limit=${limit}`);
@@ -14,7 +14,7 @@ const useGetBookingInfo = (page, limit) => {
         }
     });
 
-    return {bookingDetails, isBookingDetailsLoading};
+    return {bookingDetails, isBookingDetailsLoading, refetch};
 };
 
 export default useGetBookingInfo;
