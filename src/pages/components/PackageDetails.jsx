@@ -13,7 +13,6 @@ import { errorAlert } from "../../toastify/toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-
 const PackageDetails = () => {
     const { user } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
@@ -39,10 +38,14 @@ const PackageDetails = () => {
             setIsLoading(true);
 
             if (user && user?.email) {
+                let discount = 0;
+                // TODO: react-confetti              
+
                 const newBooking = {
-                    email: user.email,
+                    touristEmail: user.email,
                     packageID: singlePackage._id,
-                    tourGuideID: data.tourGuideID,
+                    tourGuideEmail: data.tourGuideEmail,
+                    price: (singlePackage.price - discount),
                     status: "pending",
                     date: journeyDate
                 };
@@ -242,15 +245,15 @@ const PackageDetails = () => {
                                     <div className="label">
                                         <span className="label-text">Select Tour Guide</span>
                                     </div>
-                                    <select {...register("tourGuideID", { required: "Tour guide is required." })} className="select select-bordered w-full" >
+                                    <select {...register("tourGuideEmail", { required: "Tour guide is required." })} className="select select-bordered w-full" >
                                         {!isTourGuideLoading &&
                                             tourGuides.map((guide, indx) => {
-                                                return <option key={guide._id} value={guide._id}>{guide.name}</option>
+                                                return <option key={guide._id} value={guide.email}>{guide.name}</option>
                                             })
                                         }
                                     </select>
                                 </label>
-                                <p className="text-red-500">{errors.tourGuideID?.message}</p>
+                                <p className="text-red-500">{errors.tourGuideEmail?.message}</p>
                             </div>
 
                             <div className="w-full md:col-span-2">

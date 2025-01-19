@@ -26,6 +26,7 @@ import TourGuideDetailsPage from "../pages/components/TourGuideDetailsPage";
 import Community from "../pages/Community/Community";
 import About from "../pages/About/About";
 import ErrorPage from "../components/ErrorPage";
+import TouristMyBookings from "../dashboard/TouristPage/TouristMyBookings/TouristMyBookings";
 
 export const router = createBrowserRouter([
     {
@@ -81,7 +82,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "tourist-my-bookings",
-                element: <TouristRoute><h1>tourist-my-bookings</h1></TouristRoute>
+                element: <TouristRoute><TouristMyBookings></TouristMyBookings></TouristRoute>
             },
             {
                 path: "tourist-manage-stories",

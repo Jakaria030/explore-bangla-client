@@ -1,5 +1,4 @@
 import { FaSearch } from "react-icons/fa";
-import Spinner from "../../../components/Spinner";
 import useUsers from "../../../hooks/useUsers";
 import HeaderTitle from "../../components/HeaderTitle";
 import Select from "react-select"
