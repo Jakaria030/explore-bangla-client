@@ -20,7 +20,8 @@ export default {
         "orange": "#FF8C42"
       },
       backgroundImage: {
-        'banner': 'url("/src/assets/banner.jpg")'
+        'banner': 'url("/src/assets/banner.jpg")',
+        'banner-2': 'url("/src/assets/banner-2.jpg")',
       },
     },
   },

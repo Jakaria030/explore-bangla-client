@@ -1,5 +1,6 @@
 import Banner from "./Banner";
 import Overview from "./Overview";
+import Statistic from "./Statistic";
 import TourismAndTravelGuide from "./TourismAndTravelGuide";
 import TouristStory from "./TouristStory";
 
@@ -10,6 +11,7 @@ const Home = () => {
             <Overview></Overview>
             <TourismAndTravelGuide></TourismAndTravelGuide>
             <TouristStory></TouristStory>
+            <Statistic></Statistic>
         </section>
     );
 };
