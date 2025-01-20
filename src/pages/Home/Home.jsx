@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import NewsLetter from "./NewsLetter";
 import Overview from "./Overview";
 import Statistic from "./Statistic";
 import TourismAndTravelGuide from "./TourismAndTravelGuide";
@@ -12,6 +13,7 @@ const Home = () => {
             <TourismAndTravelGuide></TourismAndTravelGuide>
             <TouristStory></TouristStory>
             <Statistic></Statistic>
+            <NewsLetter></NewsLetter>
         </section>
     );
 };
