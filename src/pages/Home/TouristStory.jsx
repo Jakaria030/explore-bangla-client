@@ -79,7 +79,7 @@ const TouristStory = () => {
                     </Link>
                     <button onClick={handleAddstory} className="flex items-center justify-center bg-orange text-white py-2"><MdAddBox className="text-xl" />Add Story</button>
                     {
-                        (user && user?.email) ? (<FacebookShareButton url={'http://localhost:5173/'} quote={`${story.title}\n${story.story}`}>
+                        (user && user?.email) ? (<FacebookShareButton url={'https://explore-bangla-9f392.web.app/'} quote={`${story.title}\n${story.story}`}>
                             <div className="flex bg-orange text-white items-center justify-center gap-2 py-2"><FaShareSquare className="text-xl" /><span>Share Story</span></div>
                         </FacebookShareButton>) : (<button onClick={handleLoginToShare} className="flex items-center justify-center gap-2 bg-orange text-white py-2">
                             <div className="flex items-center justify-center gap-2"><FaShareSquare className="text-xl" /><span>Share Story</span></div>

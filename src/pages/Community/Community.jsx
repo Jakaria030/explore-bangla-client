@@ -51,7 +51,7 @@ const Community = () => {
                                 <h2 className="text-xl font-semibold text-teal">{story.title}</h2>
                                 <p className='flex-grow text-justify line-clamp-4'>{story.story}</p>
                                 {
-                                    (user && user?.email) ? (<FacebookShareButton url={'http://localhost:5173/'} quote={`${story.title}\n${story.story}`}>
+                                    (user && user?.email) ? (<FacebookShareButton url={'https://explore-bangla-9f392.web.app/'} quote={`${story.title}\n${story.story}`}>
                                         <div className="flex bg-orange text-white items-center justify-center gap-2 py-2"><FaShareSquare className="text-xl" /><span>Share Story</span></div>
                                     </FacebookShareButton>) : (<button onClick={handleLoginToShare} className="flex items-center justify-center gap-2 bg-orange text-white py-2">
                                         <div className="flex items-center justify-center gap-2"><FaShareSquare className="text-xl" /><span>Share Story</span></div>

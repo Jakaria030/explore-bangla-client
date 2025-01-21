@@ -5,21 +5,23 @@ import Social from "../../components/Social";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { errorAlert, successAlert } from "../../toastify/toastify";
 import Spinner from "../../components/Spinner";
 
 const Login = () => {
+    const {resetPassword} = useAuth();
     const { signInUser, setUser } = useAuth();
     const [isEyeOpen, setIsEyeOpen] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    
+    const [emailError, setEmailError] = useState('');
+
     const navigate = useNavigate();
     const location = useLocation();
 
     const handleLogin = async (data) => {
-        try{
+        try {
             setIsLoading(true);
             const fbRes = await signInUser(data.email, data.password);
             setUser(fbRes.user);
@@ -27,11 +29,28 @@ const Login = () => {
             reset();
             successAlert("Login successful.");
             navigate(`${location.state ? location.state : '/'}`);
-        } catch(error){
+        } catch (error) {
             errorAlert("Email or password invalid!");
-        }finally{
+        } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
+        
+        const email = e.target.email?.value;
+        setEmailError('');
+        if(!email){
+            setEmailError('Email is required.');
+            return;
+        }
+
+        await resetPassword(email);
+        successAlert('Password reset link sent to your email.');
+
+        e.target.reset();
+        document.getElementById('closeModal').click();
     };
 
     return (
@@ -65,6 +84,7 @@ const Login = () => {
                                 }
                             </label>
                             <p className="text-left text-red-600">{errors.password?.message}</p>
+                            <p onClick={() => document.getElementById('emailModal').showModal()} className="text-md text-teal cursor-pointer text-left">Forgot Password?</p>
 
                             <button type="submit" className="w-32 h-12 rounded-full text-lg font-semibold text-white bg-teal active:scale-95 duration-100 ease-in-out transition-all">{isLoading ? <Spinner></Spinner> : "Login"}</button>
                         </form>
@@ -74,10 +94,28 @@ const Login = () => {
 
                     {/* social icons */}
                     <Social></Social>
-                    <p className="text-center my-5">Don"t have an account? <Link to="/register" className="font-semibold underline text-teal">Register</Link></p>
+                    <p className="text-center my-5">Don't have an account? <Link to="/register" className="font-semibold underline text-teal">Register</Link></p>
 
                 </div>
             </div>
+
+            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            <dialog id="emailModal" className="modal">
+                <div className="modal-box">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button id="closeModal" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <form onSubmit={handleForgotPassword} className="text-center space-y-2">
+                        <label className="input input-bordered flex items-center gap-2 mt-5">
+                            <MdEmail className="text-xl opacity-70" />
+                            <input type="email" name="email" className="grow" placeholder="Enter Your Email" />
+                        </label>
+                        {emailError && <p className="text-red-500 text-left">{emailError}</p>}
+                        <input type="submit" value={"Reset"} className="px-4 py-2 rounded-md font-semibold text-white bg-teal" />
+                    </form>
+                </div>
+            </dialog>
         </section>
     );
 };
