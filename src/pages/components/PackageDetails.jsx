@@ -46,6 +46,7 @@ const PackageDetails = () => {
                     packageID: singlePackage._id,
                     tourGuideEmail: data.tourGuideEmail,
                     price: (singlePackage.price - discount),
+                    transectionID: "",
                     status: "pending",
                     date: journeyDate
                 };

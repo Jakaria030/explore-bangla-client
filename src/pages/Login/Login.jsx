@@ -10,7 +10,7 @@ import { errorAlert, successAlert } from "../../toastify/toastify";
 import Spinner from "../../components/Spinner";
 
 const Login = () => {
-    const {resetPassword} = useAuth();
+    const { resetPassword } = useAuth();
     const { signInUser, setUser } = useAuth();
     const [isEyeOpen, setIsEyeOpen] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -38,10 +38,10 @@ const Login = () => {
 
     const handleForgotPassword = async (e) => {
         e.preventDefault();
-        
+
         const email = e.target.email?.value;
         setEmailError('');
-        if(!email){
+        if (!email) {
             setEmailError('Email is required.');
             return;
         }
@@ -84,7 +84,9 @@ const Login = () => {
                                 }
                             </label>
                             <p className="text-left text-red-600">{errors.password?.message}</p>
-                            <p onClick={() => document.getElementById('emailModal').showModal()} className="text-md text-teal cursor-pointer text-left">Forgot Password?</p>
+                            <div className="text-left">
+                                <p onClick={() => document.getElementById('emailModal').showModal()} className="text-md text-teal cursor-pointer inline-block">Forgot Password?</p>
+                            </div>
 
                             <button type="submit" className="w-32 h-12 rounded-full text-lg font-semibold text-white bg-teal active:scale-95 duration-100 ease-in-out transition-all">{isLoading ? <Spinner></Spinner> : "Login"}</button>
                         </form>

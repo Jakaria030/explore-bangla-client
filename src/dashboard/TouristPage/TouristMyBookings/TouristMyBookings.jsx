@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { errorAlert } from "../../../toastify/toastify";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const TouristMyBookings = () => {
     const { user, loading } = useAuth();
@@ -27,9 +28,6 @@ const TouristMyBookings = () => {
         setPage(page + 1);
     };
 
-    const handlePayMent = () => {
-        console.log('hello');
-    };
 
     const handleCancel = (bookingID) => {
         // console.log(bookingID);
@@ -100,8 +98,10 @@ const TouristMyBookings = () => {
                                         </td>
 
                                         <td className="flex flex-col gap-2">
-                                            <button disabled={bookingDetail.status !== 'pending'} onClick={() => handlePayMent(bookingDetail._id)} className={`${bookingDetail.status !== 'pending' && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-green-500 rounded-sm text-white`}>Pay Now</button>
-                                            <button disabled={bookingDetail.status !== 'pending'} onClick={() => handleCancel(bookingDetail._id)} className={`${bookingDetail.status !== 'pending' && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-red-500 rounded-sm text-white`}>Cancel</button>
+                                            <Link to={`/dashboard/tourist-payment/${bookingDetail._id}`} className="inline-block">
+                                                <button disabled={bookingDetail.status !== 'pending'} className={`${bookingDetail.status !== 'pending' && 'opacity-50 cursor-not-allowed'} w-full px-2 py-2 bg-green-500 rounded-sm text-white text-nowrap`}>Pay Now</button>
+                                            </Link>
+                                            <button disabled={bookingDetail.status !== 'pending'} onClick={() => handleCancel(bookingDetail._id)} className={`${bookingDetail.status !== 'pending' && 'opacity-50 cursor-not-allowed'} w-full px-2 py-2 bg-red-500 rounded-sm text-white text-nowrap`}>Cancel</button>
                                         </td>
                                     </tr>
                                     )
