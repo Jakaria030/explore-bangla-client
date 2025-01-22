@@ -12,6 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { errorAlert } from "../../toastify/toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import Confetti from 'react-confetti';
+
 
 const PackageDetails = () => {
     const { user } = useAuth();
@@ -39,16 +41,23 @@ const PackageDetails = () => {
 
             if (user && user?.email) {
                 let discount = 0;
-                // TODO: react-confetti              
+                const countRes = await axiosSecure.get(`/bookings/counts?email=${user?.email}`);
+                const bookingCounts = countRes.data?.bookingCounts;
+                
+                if(bookingCounts >= 2){
+                    document.getElementById('show_modal').click();
+                    discount = 10;
+                }
+
 
                 const newBooking = {
                     touristEmail: user.email,
                     packageID: singlePackage._id,
                     tourGuideEmail: data.tourGuideEmail,
-                    price: (singlePackage.price - discount),
-                    transectionID: "",
+                    price: (singlePackage.price - (singlePackage.price*discount)/100),
                     status: "pending",
-                    date: journeyDate
+                    date: journeyDate,
+                    transectionID: ""
                 };
 
                 const res = await axiosSecure.post(`/bookings?email=${user?.email}`, newBooking);
@@ -265,6 +274,23 @@ const PackageDetails = () => {
 
                 </section>
             }
+
+            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            <button id="show_modal" onClick={() => document.getElementById('discountModal').showModal()}></button>
+            <dialog id="discountModal" className="modal">
+                <div className="modal-box rounded-md">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button id="close_modal" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <div className="py-5 text-center space-y-1">
+                        <Confetti width={500} height={200}></Confetti>
+                        <h2 className="text-2xl font-bold text-teal">Congratulations 🎉</h2>
+                        <p className="pb-5">You got 10% discount!</p>
+                        <button  onClick={() => {document.getElementById('close_modal').click();}} className="px-4 py-2 rounded-sm text-white bg-teal">Apply Discount</button>
+                    </div>
+                </div>
+            </dialog>
         </>
     );
 };
