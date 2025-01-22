@@ -51,7 +51,6 @@ const TourGuideManageProfile = () => {
 
             reset();
         } catch (error) {
-            console.log(error);
             errorAlert("Profile is not updated.");
         } finally {
             setIsLoading(false);
@@ -60,7 +59,7 @@ const TourGuideManageProfile = () => {
 
     return (
         <section>
-            <HeaderTitle title={`Welcome ${user.displayName}`}></HeaderTitle>
+            <HeaderTitle title={`Welcome ${user?.displayName}`}></HeaderTitle>
 
             {
                 (!loading && !isUserRoleLoading) && (<div className="max-w-8xl mx-auto px-5">

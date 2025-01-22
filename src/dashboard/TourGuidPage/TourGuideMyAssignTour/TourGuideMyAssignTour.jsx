@@ -5,6 +5,8 @@ import useGetBookingInfoForTourGuide from "../../../hooks/useGetBookingInfoForTo
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { format } from "date-fns";
 import { MdKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { errorAlert, successAlert } from "../../../toastify/toastify";
+import Swal from "sweetalert2";
 
 const TourGuideMyAssignTour = () => {
     const { user, loading } = useAuth();
@@ -24,12 +26,43 @@ const TourGuideMyAssignTour = () => {
         setPage(page + 1);
     };
 
-    const handleAccept = (id) => {
-        console.log(id);
+    const handleAccept = async (id) => {
+        // console.log(id);
+        try {
+            await axiosSecure.patch(`/bookings/update-booking/${id}`, { status: 'accepted' });
+            successAlert('Accepted');
+            refetch();
+        } catch (error) {
+            errorAlert(error.message);
+        }
     };
 
     const handleReject = (id) => {
-        console.log(id);
+        // console.log(id);
+        try {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to reject this booking!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, reject it!"
+            }).then(async(result) => {
+                if (result.isConfirmed) {
+                    await axiosSecure.patch(`/bookings/update-booking/${id}`, { status: 'rejected' });
+                    refetch();
+                    Swal.fire({
+                        title: "Rejected!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+
+        } catch (error) {
+            errorAlert(error.message);
+        }
     };
 
 
@@ -69,8 +102,8 @@ const TourGuideMyAssignTour = () => {
                                         </td>
 
                                         <td className="flex flex-col gap-2">
-                                            <button onClick={() => handleAccept(bookingDetail._id)} disabled={!(bookingDetail.status === 'in-review')}  className={`${!(bookingDetail.status === 'in-review') && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-green-500 rounded-sm text-white`}>Accept</button>
-                                            <button onClick={() => handleReject(bookingDetail._id)} disabled={bookingDetail.status === 'pending'}  className={`${bookingDetail.status === 'pending' && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-red-500 rounded-sm text-white`}>Reject</button>
+                                            <button onClick={() => handleAccept(bookingDetail._id)} disabled={!(bookingDetail.status === 'in-review' || bookingDetail.status === 'rejected')} className={`${!(bookingDetail.status === 'in-review' || bookingDetail.status === 'rejected') && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-green-500 rounded-sm text-white`}>Accept</button>
+                                            <button onClick={() => handleReject(bookingDetail._id)} disabled={!(bookingDetail.status === 'in-review' || bookingDetail.status === 'accepted')} className={`${!(bookingDetail.status === 'in-review' || bookingDetail.status === 'accepted') && 'opacity-50 cursor-not-allowed'} w-20 h-8 bg-red-500 rounded-sm text-white`}>Reject</button>
                                         </td>
                                     </tr>
                                     )

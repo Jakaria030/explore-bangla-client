@@ -29,6 +29,7 @@ import ErrorPage from "../components/ErrorPage";
 import TouristMyBookings from "../dashboard/TouristPage/TouristMyBookings/TouristMyBookings";
 import TourGuideMyAssignTour from "../dashboard/TourGuidPage/TourGuideMyAssignTour/TourGuideMyAssignTour";
 import Payment from "../dashboard/Payment/Payment";
+import AdminManageProfile from "../dashboard/AdminPage/AdminManageProfile/AdminManageProfile";
 
 export const router = createBrowserRouter([
     {
@@ -132,7 +133,7 @@ export const router = createBrowserRouter([
             // admin routes
             {
                 path: "admin-manage-profile",
-                element: <AdminRoute><h1>admin-manage-profile</h1></AdminRoute>
+                element: <AdminRoute><AdminManageProfile></AdminManageProfile></AdminRoute>
             },
             {
                 path: "admin-add-package",
