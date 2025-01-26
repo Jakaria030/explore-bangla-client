@@ -4,6 +4,10 @@ It's your trusted tourism management system plateform.
 ## Purpose
 Explore Bangla is a web-based tourism management system designed to simplify travel planning in Bangladesh. It connects tourists with curated tour packages, trusted guides, and secure online bookings. The platform enhances user experience by offering personalized profiles and seamless management for tourists, guides, and admins.
 
+**Admin Credentails For Login Admin Panel:** <br /> 
+Email: jakariag84@gmail.com <br />
+Password: Gj#12345 
+
 ## Preview
 ![Project Image](public/explore-bangla.png)
 
