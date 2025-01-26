@@ -39,6 +39,7 @@ const CheckoutForm = ({booking_id, price}) => {
         const card = elements.getElement(CardElement);
 
         if (card == null) {
+            setIsLoading(false);
             return;
         }
 
@@ -49,6 +50,7 @@ const CheckoutForm = ({booking_id, price}) => {
 
         if(error){
             setError(error.message);
+            setIsLoading(false);
         } else{
             setError('');
         }
@@ -66,6 +68,7 @@ const CheckoutForm = ({booking_id, price}) => {
 
         if(confirmError){
             setError(confirmError.message);
+            setIsLoading(false);
         }else{
             setError('');
             if(paymentIntent.status === 'succeeded'){
