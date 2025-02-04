@@ -8,11 +8,11 @@ Explore Bangla is a web-based tourism management system designed to simplify tra
 Email: jakariag84@gmail.com <br />
 Password: Gj#12345 
 
-## Preview
-![Project Image](public/explore-bangla.png)
-
 ## Live URL
 [Visit Explore Bangla Website](https://explore-bangla-9f392.web.app/)
+
+## Preview
+![Project Image](public/explore-bangla.png)
 
 ## Key Features
 
@@ -37,7 +37,6 @@ Password: Gj#12345
   - Add new tour packages to the system.  
   - Review and manage applications for users applying as tour guides.  
   - View and manage all users, including tourists and tour guides.  
-
 
 ## Technologies Used
 This project was built using the following technologies:
@@ -73,11 +72,11 @@ Follow these steps to set up and run the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Jakaria030.git
+   git clone https://github.com/Jakaria030/explore-bangla-client.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd b10a12-client-side-Jakaria030
+   cd explore-bangla-client
    ```
 3. Install dependencies:
    ```bash
@@ -88,5 +87,5 @@ Follow these steps to set up and run the project locally:
    npm run dev
    ```
 5. You have to setup some other things like firebase as per your need. Also you have to setup backend server. <br>
-   Follow my server sidde Github reposity docs.
-[Visit](https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-Jakaria030)
+   Follow my server side github repository docs.
+[Visit](https://github.com/Jakaria030/explore-bangla-server)
