@@ -1,6 +1,7 @@
 import Banner from "./Banner";
 import NewsLetter from "./NewsLetter";
 import Overview from "./Overview";
+import PopularStapes from "./PopularStapes";
 import Statistic from "./Statistic";
 import TourismAndTravelGuide from "./TourismAndTravelGuide";
 import TouristStory from "./TouristStory";
@@ -11,6 +12,7 @@ const Home = () => {
             <Banner></Banner>
             <Overview></Overview>
             <TourismAndTravelGuide></TourismAndTravelGuide>
+            <PopularStapes></PopularStapes>
             <TouristStory></TouristStory>
             <Statistic></Statistic>
             <NewsLetter></NewsLetter>
