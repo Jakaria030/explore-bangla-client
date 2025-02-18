@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import ChooseUs from "./ChooseUs";
 import NewsLetter from "./NewsLetter";
 import Overview from "./Overview";
 import PopularStapes from "./PopularStapes";
@@ -13,8 +14,9 @@ const Home = () => {
             <Overview></Overview>
             <TourismAndTravelGuide></TourismAndTravelGuide>
             <PopularStapes></PopularStapes>
-            <TouristStory></TouristStory>
             <Statistic></Statistic>
+            <TouristStory></TouristStory>
+            <ChooseUs></ChooseUs>
             <NewsLetter></NewsLetter>
         </section>
     );

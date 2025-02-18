@@ -23,7 +23,7 @@ const PackageCard = ({ item }) => {
                     <div className="flex justify-between gap-1 sm:gap-5 mb-4">
                         <p className="flex gap-1 sm:gap-2 items-center"><IoTimerOutline className="text-xl text-orange shrink-0" />{item.duration}</p>
                         <p className="flex gap-1 sm:gap-2 items-center"><PiUsersThreeThin className="text-xl text-orange shrink-0"/>{item.members} person</p>
-                        <p className="flex gap-1 sm:gap-2 items-center"><AiOutlineDollar className="text-xl text-orange shrink-0"/>{item.price} Dolor</p>
+                        <p className="flex gap-1 sm:gap-2 items-center"><AiOutlineDollar className="text-xl text-orange shrink-0"/>{item.price} Dollar</p>
                     </div>
 
                     <Link to={`/package-details/${item._id}`}>
