@@ -13,6 +13,8 @@ import totalClients from "../../../assets/tourist.png";
 import totalStories from "../../../assets/storytelling.png";
 import { useQuery } from "@tanstack/react-query";
 
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { LineChart, Line } from "recharts";
 
 const AdminManageProfile = () => {
     const { user, setUser, updateUserProfile, loading } = useAuth();
@@ -71,6 +73,19 @@ const AdminManageProfile = () => {
         }
     }
 
+    const chartData = counts ? [
+        { name: "Payment(k)", count: counts.totalPayment / 1000 },
+        { name: "Clients", count: counts.totalClients },
+        { name: "Guides", count: counts.totalTourGuides },
+        { name: "Packages", count: counts.totalPackages },
+        { name: "Stories", count: counts.totalStories },
+    ] : [];
+
+    const chartColors = {
+        bar: "teal",
+        line: "teal",
+    };
+
     return (
         <section>
             <HeaderTitle title={`Welcome ${user?.displayName}`}></HeaderTitle>
@@ -107,6 +122,36 @@ const AdminManageProfile = () => {
 
                     </div>}
                 </section>
+
+                {/* Chart here */}
+                <h2 className="text-center text-2xl font-bold">Overview</h2>
+                <div className="max-w-8xl mx-auto px-5 mt-8 md:mt-16 grid grid-cols-2 gap-8">
+                    {/* Bar Chart */}
+                    <div className="bg-white shadow-lg p-5 rounded-lg">
+                        <ResponsiveContainer width="100%" height={250}>
+                            <BarChart data={chartData} barSize={50}>
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="count" fill={chartColors.bar} radius={[5, 5, 0, 0]} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    {/* Line Chart */}
+                    <div className="bg-white shadow-lg p-5 rounded-lg">
+                        <ResponsiveContainer width="100%" height={250}>
+                            <LineChart data={chartData}>
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="count" stroke={chartColors.line} strokeWidth={2} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
 
                 {
                     (!loading && !isUserRoleLoading) && (<div className="max-w-8xl mx-auto px-5">

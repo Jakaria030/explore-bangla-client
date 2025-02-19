@@ -43,12 +43,12 @@ const Social = () => {
             <button onClick={handleGoogleSignIn} className='p-3 bg-teal/20 rounded-md'>
                 <FaGoogle className='text-2xl' />
             </button>
-            <button className='p-3 bg-teal/20 rounded-md'>
+            {/* <button className='p-3 bg-teal/20 rounded-md'>
                 <FaFacebook className='text-2xl' />
             </button>
             <button className='p-3 bg-teal/20 rounded-md'>
                 <FaGithub className='text-2xl' />
-            </button>
+            </button> */}
         </div>
     );
 };
