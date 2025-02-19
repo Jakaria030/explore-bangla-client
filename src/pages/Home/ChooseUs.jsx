@@ -1,13 +1,14 @@
 import { PiWaveSawtooth } from "react-icons/pi";
 import { HiMiniUsers } from "react-icons/hi2";
 import { MdPriceCheck } from "react-icons/md";
+import cloud from "../../assets/cloud.jpg";
 
 const ChooseUs = () => {
     return (
         <section className="max-w-8xl mx-auto px-5">
             <div className="flex flex-col lg:flex-row gap-5 md:gap-10">
                 <figure className="basis-1/2 lg:basis-full flex items-center justify-">
-                    <img className="mx-auto" src="/src/assets/cloud.jpg" />
+                    <img className="mx-auto" src={cloud}/>
                 </figure>
                 <div className="basis-1/2 lg:basis-full bg-teal">
                     <div className="space-y-5 p-5">

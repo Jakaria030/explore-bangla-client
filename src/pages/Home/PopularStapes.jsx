@@ -1,5 +1,7 @@
 import { FaRegImage, FaRegUser } from "react-icons/fa";
 import { TbBulb } from "react-icons/tb";
+import manOnMap1 from "../../assets/man-on-map-1.png";
+import manOnMap2 from "../../assets/man-on-map-2.png";
 
 const PopularStapes = () => {
     return (
@@ -42,8 +44,8 @@ const PopularStapes = () => {
                 </div>
                 <div className="bg-map bg-no-repeat bg-cover bg-center shadow-lg">
                     <figure className="p-5 pb-0">
-                        <img className="mx-auto hidden lg:flex" src="/src/assets/man-on-map-1.png" />
-                        <img className="mx-auto lg:hidden" src="/src/assets/man-on-map-2.png" />
+                        <img className="mx-auto hidden lg:flex" src={manOnMap1} />
+                        <img className="mx-auto lg:hidden" src={manOnMap2} />
                     </figure>
                 </div>
             </div>
