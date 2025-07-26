@@ -8,6 +8,14 @@ Explore Bangla is a web-based tourism management system designed to simplify tra
 Email: jakariag84@gmail.com <br />
 Password: Gj#12345 
 
+**Tour-Guide Credentails For Login Tour-Guide Profile:** <br /> 
+Email: arafathosen32@gmail.com
+Password: Gj#12345
+
+**Tourist Credentails For Login Tourist Profile:** <br /> 
+Email: musfiqurrahman14@gmail.com
+Password: Gj#12345
+
 ## Live URL
 [Visit Explore Bangla Website](https://explore-bangla-9f392.web.app/)
 
